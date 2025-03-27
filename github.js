@@ -1,4 +1,3 @@
-const scrolling = { behavior: 'smooth', block: 'center',  inline: 'center' };
 /** 
 *  Profile click 
 *  @return {void}
@@ -36,6 +35,7 @@ const openNewToken = () => {
 *  @return {void}
 **/
 const fillForm = () => {
+  const scrolling = { behavior: 'smooth', block: 'center',  inline: 'center' };
   setTimeout(() => {
     const nt = document.getElementById('oauth_access_description');
     if (nt && 'value' in nt) {
@@ -51,7 +51,7 @@ const fillForm = () => {
           rp.checked = true;
         }
         setTimeout(() => {
-          document.querySelector('.btn-primary.btn[type="submit"]')?.click();
+          [...document.querySelectorAll('.btn-primary.btn[type="submit"]')].filter(b => b.innerText.toLowerCase().trim() === 'generate token').at(0)?.click();
         }, 1000);
       }
     }, 500);
