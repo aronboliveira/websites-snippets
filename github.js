@@ -4,7 +4,7 @@ const scrolling = { behavior: 'smooth', block: 'center',  inline: 'center' };
 *  @return {void}
 **/
 const openSettings = () => {
-  document.querySelector('.avatar.circle')?..click();
+  document.querySelector('.avatar.circle')?.click();
   setTimeout(() => window.open(document.querySelector('a[href="/settings/profile"]')?.href, '_self'), 2000);
 }
 /** 
