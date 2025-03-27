@@ -3,7 +3,7 @@ const scrolling = { behavior: 'smooth', block: 'center',  inline: 'center' };
 *  Profile click 
 *  @return {void}
 **/
-const openSettings() => {
+const openSettings = () => {
   document.querySelector('.avatar.circle')?..click();
   setTimeout(() => window.open(document.querySelector('a[href="/settings/profile"]')?.href, '_self'), 2000);
 }
@@ -11,21 +11,21 @@ const openSettings() => {
 *  Developer settings click 
 *  @return {void}
 **/
-const openDevSettings() => {
+const openDevSettings = () => {
   setTimeout(() => window.open(document.querySelector('a[href="/settings/apps"]')?.href, '_self'), 2000);
 }
 /** 
 *  Personal access tokens click
 *  @return {void}
 **/
-const openTokens() => {
+const openTokens = () => {
   setTimeout(() => window.open(document.querySelector('a[href="/settings/tokens"]')?.href, '_self'), 2000);
 }
 /** 
 *  Generate new classic token 
 *  @return {void}
 **/
-const openNewToken() => {
+const openNewToken = () => {
   /* Details for generating new token */
   setTimeout(() => document.querySelector('.details-reset.details-overlay.d-inline-block.position-relative')?.click(), 2000);
   /* Generate new token */
@@ -35,7 +35,7 @@ const openNewToken() => {
 *  Fillings
 *  @return {void}
 **/
-const fillForm() => {
+const fillForm = () => {
   setTimeout(() => {
     const nt = document.getElementById('oauth_access_description');
     if (nt && 'value' in nt) {
