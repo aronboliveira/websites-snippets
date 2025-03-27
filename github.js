@@ -3,8 +3,7 @@ const scrolling = { behavior: 'smooth', block: 'center',  inline: 'center' };
 const ca = document.querySelector('.avatar.circle');
 ca.click();
 /* Settings click */
-const st = document.getElementById(':r22:');
-setTimeout(() => window.open(st?.href, '_self'), 2000);
+setTimeout(() => window.open(document.querySelector('a[href="/settings/profile"]')?.href, '_self'), 2000);
 /* Developer settings click */
 setTimeout(() => window.open(document.querySelector('a[href="/settings/apps"]')?.href, '_self'), 2000);
 /* Personal access tokens click */
