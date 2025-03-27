@@ -54,3 +54,5 @@ const fillForm() => {
     }, 500);
   }, 2000);
 }
+const functions = 'openSettings, openDevSettings, openTokens, openNewToken, fillForm';
+console.log(functions);
