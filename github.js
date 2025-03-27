@@ -8,7 +8,7 @@ setTimeout(() => window.open(st?.href, '_self'), 2000);
 /* Developer settings click */
 setTimeout(() => window.open(document.querySelector('a[href="/settings/apps"]')?.href, '_self'), 2000);
 /* Personal access tokens click */
-setTimeout(() => window.open(document.querySelector('a[href="/settings/tokens")')?.href, '_self'), 2000);
+setTimeout(() => window.open(document.querySelector('a[href="/settings/tokens"]')?.href, '_self'), 2000);
 /* Details for generating new token */
 setTimeout(() => document.querySelector('.details-reset.details-overlay.d-inline-block.position-relative')?.click(), 2000);
 /* Generate new token */
