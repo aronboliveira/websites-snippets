@@ -50,6 +50,9 @@ const fillForm = () => {
           rp.dispatchEvent(new MouseEvent('click', { bubbles: false }));
           rp.checked = true;
         }
+        setTimeout(() => {
+          document.querySelector('.btn-primary.btn[type="submit"]')?.click();
+        }, 1000);
       }
     }, 500);
   }, 2000);
