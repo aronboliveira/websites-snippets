@@ -17,19 +17,18 @@ setTimeout(() => window.open(document.querySelector('a[href="/settings/tokens/ne
 setTimeout(() => {
   const nt = document.getElementById('oauth_access_description');
   if (nt && 'value' in nt) {
-      nt.scrollIntoView(scrolling);
-      nt.value = 'Access to private repos';
+    nt.scrollIntoView(scrolling);
+    nt.value = 'Access to private repos';
   }
   setTimeout(() => {
     const rp = document.getElementsByName('oauth_access[scopes][]')[0];
-    if (rp && 'checked' in nt) {
+    if (rp && 'checked' in rp) {
       rp.scrollIntoView(scrolling);
-      if (!nt.chcked) {
-        nt.dispatchEvent(new MouseEvent('click', { bubbles: false });
-        nt.checked = true;
+      if (!rp.checked) {
+        rp.dispatchEvent(new MouseEvent('click', { bubbles: false }));
+        rp.checked = true;
       }
     }
   }, 500);
-  document.getElementById('oauth_access_description')?.value = 'Access to private repos';
 }, 2000);
 
