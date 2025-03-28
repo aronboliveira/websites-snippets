@@ -74,7 +74,7 @@ const checkBranchRules = () => {
         if (!(l instanceof HTMLElement)) return;
         let cb;
         if (l instanceof HTMLLabelElement)
-            cb = l.closest("fieldset").querySelector(`#${l.htmlFor}`);
+            cb = document.getElementById(`${l.htmlFor}`);
         if (!cb)
             cb = l
                 .closest("[class^=prc-FormControl-ControlHorizontalLayout]")
