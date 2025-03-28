@@ -69,6 +69,10 @@ const fillForm = () => {
   }, 2000);
 }
 // javascript:(() => { const scrolling = { behavior: 'smooth', block: 'center', inline: 'center' }; setTimeout(() => { const nt = document.getElementById('oauth_access_description'); if (nt && 'value' in nt) { nt.scrollIntoView(scrolling); nt.value = 'Access to private repos'; } setTimeout(() => { const rp = document.getElementsByName('oauth_access[scopes][]')[0]; if (rp && 'checked' in rp) { rp.scrollIntoView(scrolling); if (!rp.checked) { rp.dispatchEvent(new MouseEvent('click', { bubbles: false })); rp.checked = true; } setTimeout(() => { [...document.querySelectorAll('.btn-primary.btn[type="submit"]')].filter(b => b.innerText.toLowerCase().trim() === 'generate token').at(0)?.click();%20},%201000);%20}%20},%20500);%20},%202000);%20})();
+/** 
+*  Quick, simple filling of branch rule 
+*  @return {void}
+**/
 const checkBranchRules = () => {
     const markRelatedCheckbox = (l) => {
         if (!(l instanceof HTMLElement)) return;
