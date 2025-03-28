@@ -313,7 +313,7 @@ function addWhatsAppKbShortcuts() {
                     (e.key === "ArrowRight" ||
                         e.key === "Right" ||
                         e.keyCode === 39) &&
-                    e.altKey
+                    e.ctrlKey
                 ) {
                     e.preventDefault();
                     archive?.click();
@@ -324,7 +324,7 @@ function addWhatsAppKbShortcuts() {
                     (e.key === "ArrowLeft" ||
                         e.key === "Left" ||
                         e.keyCode === 37) &&
-                    e.altKey
+                    e.ctrlKey
                 ) {
                     e.preventDefault();
                     back?.click();
@@ -343,4 +343,4 @@ function addWhatsAppKbShortcuts() {
         }
     }, 500);
 }
-// javascript:(()=>{function a(){setInterval(()=>{const o=[...(document.body?.getElementsByTagName("button")||[])].filter(e=>["arquivado","arquivados","arquivada","arquivadas","archived","archive","archivado","archivados","archivada","archivadas","archivé","archivée","archivés","archivées","archiviato","archiviati","archiviata","archiviate","arquivado","arquivada","arq.","arch.","архив","архивирован","архивировано","архивированы","архивирована","已归档","归档","存档","已歸檔","歸檔","存檔","アーカイブ","アーカイブ済み","保存済み","保管済み","보관됨","아카이브","보관","مؤرشف","أرشفة","محفوظ","الملفات المؤرشفة","arşivlendi","arşiv","gearchiveerd","archief","आर्काइव्ड","संग्रहित","अभिलेखागार","diarsipkan","arsip","đã lưu trữ","lưu trữ","ที่เก็บถาวร","เก็บถาวร","בארכיון","ארכיון","αρχειοθετημένα","αρχειοθέτηση","arc.","archd","archv"].some(t=>[e.getAttribute("aria-label"),e.innerText].some(e=>(e?.toString().trim().toLowerCase())===t.trim().toLowerCase()))[0],n=[...document.getElementsByTagName("header")].filter(e=>e.getElementsByTagName("button")||e.querySelector('[role="button"]')).flatMap(e=>[...e.getElementsByTagName("button"),...e.querySelectorAll('[role="button"]')]).filter(e=>["back","back-"].some(t=>[e.getAttribute("aria-label"),e.getAttribute("data-icon")].some(e=>e?.toLowerCase().trim().startsWith(t))))[0],c=t=>{(t.key==="ArrowRight"||t.key==="Right"||t.keyCode===39)&&t.altKey&&(t.preventDefault(),o?.click())},d=t=>{(t.key==="ArrowLeft"||t.key==="Left"||t.keyCode===37)&&t.altKey&&(t.preventDefault(),n?.click())};o instanceof HTMLElement&&o.dataset.listening!=="true"&&(addEventListener("keyup",c,{bubbles:!1},o.dataset.listening="true"),n instanceof HTMLElement&&n.dataset.listening!=="true"&&(addEventListener("keyup",d,{bubbles:!1},n.dataset.listening="true")))},500)}a()})();
+// javascript:(()=>{function a(){setInterval(()=>{const o=[...(document.body?.getElementsByTagName("button")||[])].filter(e=>["arquivado","arquivados","arquivada","arquivadas","archived","archive","archivado","archivados","archivada","archivadas","archivé","archivée","archivés","archivées","archiviato","archiviati","archiviata","archiviate","arquivado","arquivada","arq.","arch.","архив","архивирован","архивировано","архивированы","архивирована","已归档","归档","存档","已歸檔","歸檔","存檔","アーカイブ","アーカイブ済み","保存済み","保管済み","보관됨","아카이브","보관","مؤرشف","أرشفة","محفوظ","الملفات المؤرشفة","arşivlendi","arşiv","gearchiveerd","archief","आर्काइव्ड","संग्रहित","अभिलेखागार","diarsipkan","arsip","đã lưu trữ","lưu trữ","ที่เก็บถาวร","เก็บถาวร","בארכיון","ארכיון","αρχειοθετημένα","αρχειοθέτηση","arc.","archd","archv"].some(t=>[e.getAttribute("aria-label"),e.innerText].some(e=>(e?.toString().trim().toLowerCase())===t.trim().toLowerCase()))[0],n=[...document.getElementsByTagName("header")].filter(e=>e.getElementsByTagName("button")||e.querySelector('[role="button"]')).flatMap(e=>[...e.getElementsByTagName("button"),...e.querySelectorAll('[role="button"]')]).filter(e=>["back","back-"].some(t=>[e.getAttribute("aria-label"),e.getAttribute("data-icon")].some(e=>e?.toLowerCase().trim().startsWith(t))))[0],c=t=>{(t.key==="ArrowRight"||t.key==="Right"||t.keyCode===39)&&t.ctrlKey&&(t.preventDefault(),o?.click())},d=t=>{(t.key==="ArrowLeft"||t.key==="Left"||t.keyCode===37)&&t.ctrlKey&&(t.preventDefault(),n?.click())};o instanceof HTMLElement&&o.dataset.listening!=="true"&&(addEventListener("keyup",c,{bubbles:!1},o.dataset.listening="true"),n instanceof HTMLElement&&n.dataset.listening!=="true"&&(addEventListener("keyup",d,{bubbles:!1},n.dataset.listening="true")))},500)}a()})();
