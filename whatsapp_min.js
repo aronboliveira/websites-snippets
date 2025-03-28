@@ -10,4 +10,5 @@ javascript:(function(){const queryAllElements=()=>{const archive=[...(document.b
   6. Alt + s => Group messages tab
   7. Alt + m => More options click
   8. Alt + n = Create new group
+  NOTE: !! THIS NEEDS TO BE REACTIVATED EVERY TIME YOU LOAD THE WEBPAGE !!
 **/
