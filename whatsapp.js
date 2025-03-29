@@ -804,6 +804,303 @@ function addWhatsAppKbShortcuts() {
 }
 
 /**
+* Version with shortcuts only for tab buttons for types of messages
+**/
+function addWhatsAppKbShortcuts__TabBtnsOnly() {
+  const queryAllElements = () => {
+      const tabBtns = [...document.body.querySelectorAll('button[role="tab"]')],
+        all =
+          document.getElementById("all-filter") ??
+          tabBtns.find((b) => {
+            const t = b.innerText?.trim().toLowerCase();
+            return [
+              "all",
+              "todos",
+              "tout",
+              "alle",
+              "tutti",
+              "все",
+              "全部",
+              "すべて",
+              "전체",
+              "الكل",
+              "सभी",
+              "সব",
+              "تمام",
+              "semua",
+              "tất cả",
+              "tümü",
+              "wszystko",
+              "allemaal",
+              "all",
+            ].includes(t);
+          }),
+        unread =
+          document.getElementById("unread-filter") ??
+          tabBtns.find((b) => {
+            const t = b.innerText?.trim().toLowerCase();
+            return [
+              "unread",
+              "não lidos",
+              "no leídos",
+              "non lus",
+              "ungelesen",
+              "non letti",
+              "непрочитанные",
+              "未读",
+              "未讀",
+              "未読",
+              "읽지 않음",
+              "غير المقروء",
+              "अनपढ़",
+              "অপঠিত",
+              "انپڑھی",
+              "belum dibaca",
+              "chưa đọc",
+              "okunmamış",
+              "nieprzeczytane",
+              "ongelezen",
+            ].includes(t);
+          }),
+        favourites =
+          document.getElementById("favorites-filter") ??
+          tabBtns.find((b) => {
+            const t = b.innerText?.trim().toLowerCase();
+            return [
+              "favourites",
+              "favorites",
+              "favoritos",
+              "favoritas",
+              "favoris",
+              "favoriten",
+              "preferiti",
+              "избранное",
+              "收藏",
+              "お気に入り",
+              "즐겨찾기",
+              "المفضلة",
+              "पसंदीदा",
+              "পছন্দের",
+              "پسندیدہ",
+              "favorit",
+              "yêu thích",
+              "favoriler",
+              "ulubione",
+              "favorieten",
+            ].includes(t);
+          }),
+        groups =
+          document.getElementById("group-filter") ??
+          tabBtns.find((b) => {
+            const t = b.innerText?.trim().toLowerCase();
+            return [
+              "groups",
+              "grupos",
+              "groupes",
+              "gruppen",
+              "gruppi",
+              "группы",
+              "群组",
+              "群組",
+              "グループ",
+              "그룹",
+              "مجموعات",
+              "समूह",
+              "গ্রুপ",
+              "گروپ",
+              "grup",
+              "nhóm",
+              "gruplar",
+              "grupy",
+              "groepen",
+            ].includes(t);
+          });
+      return {
+        all,
+        unread,
+        favourites,
+        groups,
+      };
+    },
+    allCb = (e) => {
+      if (!((e.key.toLowerCase() === "q" || e.keyCode === 81) && e.altKey))
+        return;
+      (
+        document.getElementById("all-filter") ??
+        tabBtns.find((b) => {
+          const t = b.innerText?.trim().toLowerCase();
+          return [
+            "all",
+            "todos",
+            "tout",
+            "alle",
+            "tutti",
+            "все",
+            "全部",
+            "すべて",
+            "전체",
+            "الكل",
+            "सभी",
+            "সব",
+            "تمام",
+            "semua",
+            "tất cả",
+            "tümü",
+            "wszystko",
+            "allemaal",
+            "all",
+          ].includes(t);
+        })
+      )?.click();
+    },
+    unreadCb = (e) => {
+      if (!((e.key.toLowerCase() === "w" || e.keyCode === 87) && e.altKey))
+        return;
+      (
+        document.getElementById("unread-filter") ??
+        tabBtns.find((b) => {
+          const t = b.innerText?.trim().toLowerCase();
+          return [
+            "unread",
+            "não lidos",
+            "no leídos",
+            "non lus",
+            "ungelesen",
+            "non letti",
+            "непрочитанные",
+            "未读",
+            "未讀",
+            "未読",
+            "읽지 않음",
+            "غير المقروء",
+            "अनपढ़",
+            "অপঠিত",
+            "انپڑھی",
+            "belum dibaca",
+            "chưa đọc",
+            "okunmamış",
+            "nieprzeczytane",
+            "ongelezen",
+          ].includes(t);
+        })
+      )?.click();
+    },
+    fvtCb = (e) => {
+      if (!((e.key.toLowerCase() === "a" || e.keyCode === 65) && e.altKey))
+        return;
+      (
+        document.getElementById("favorites-filter") ??
+        tabBtns.find((b) => {
+          const t = b.innerText?.trim().toLowerCase();
+          return [
+            "favourites",
+            "favorites",
+            "favoritos",
+            "favoritas",
+            "favoris",
+            "favoriten",
+            "preferiti",
+            "избранное",
+            "收藏",
+            "お気に入り",
+            "즐겨찾기",
+            "المفضلة",
+            "पसंदीदा",
+            "পছন্দের",
+            "پسندیدہ",
+            "favorit",
+            "yêu thích",
+            "favoriler",
+            "ulubione",
+            "favorieten",
+          ].includes(t);
+        })
+      )?.click();
+    },
+    groupsCb = (e) => {
+      if (!((e.key.toLowerCase() === "s" || e.keyCode === 83) && e.altKey))
+        return;
+      (
+        document.getElementById("group-filter") ??
+        tabBtns.find((b) => {
+          const t = b.innerText?.trim().toLowerCase();
+          return [
+            "groups",
+            "grupos",
+            "groupes",
+            "gruppen",
+            "gruppi",
+            "группы",
+            "群组",
+            "群組",
+            "グループ",
+            "그룹",
+            "مجموعات",
+            "समूह",
+            "গ্রুপ",
+            "گروپ",
+            "grup",
+            "nhóm",
+            "gruplar",
+            "grupy",
+            "groepen",
+          ].includes(t);
+        })
+      )?.click();
+    };
+  const { all, unread, favourites, groups } = queryAllElements();
+  for (const { e, cb } of [
+    {
+      e: all,
+      cb: allCb,
+    },
+    {
+      e: unread,
+      cb: unreadCb,
+    },
+    {
+      e: favourites,
+      cb: fvtCb,
+    },
+    {
+      e: groups,
+      cb: groupsCb,
+    },
+  ]) {
+    if (e instanceof HTMLElement && e.dataset.listening === "true") {
+      e.removeAttribute("data-listening");
+      window.removeEventListener("keydown", cb);
+    }
+  }
+  setInterval(() => {
+    const { all, unread, favourites, groups } = queryAllElements();
+    for (const { e, cb } of [
+      {
+        e: all,
+        cb: allCb,
+      },
+      {
+        e: unread,
+        cb: unreadCb,
+      },
+      {
+        e: favourites,
+        cb: fvtCb,
+      },
+      {
+        e: groups,
+        cb: groupsCb,
+      },
+    ]) {
+      if (e instanceof HTMLElement && e.dataset.listening !== "true") {
+        window.addEventListener("keydown", cb);
+        e.dataset.listening = "true";
+      }
+    }
+  }, 500);
+}
+
+/**
 * Version with shortcuts only for archives
 **/
 
