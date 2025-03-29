@@ -6,7 +6,7 @@ Save the minified version as a bookmark for usage through clicking, or write the
 
 ⚠ IMPORTANT: These snippets **DO NOT PERSIST** through sessions. You have to click on them after every page load you wish to use them.
 
-🕷 Please submit any **Bugs** to [Developer e-mail](mailto:aron.programador@gmail.com)
+🕷 Please submit any **Bugs** to the [Developer e-mail](mailto:aron.programador@gmail.com)
 
 # 📘 Universal Bookmarklet Guide for All Browsers
 
