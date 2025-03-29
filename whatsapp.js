@@ -319,6 +319,60 @@ function addWhatsAppKbShortcuts() {
                 "ປິດ-",
               ].includes(c.getAttribute("data-icon")?.trim().toLowerCase())
             )
+        ),
+        search = [
+          ...document.querySelectorAll("p.selectable-text.copyable-text"),
+        ].find((p) =>
+          [
+            "pesquisar",
+            "busca",
+            "procurar",
+            "buscar",
+            "búsqueda",
+            "search",
+            "find",
+            "lookup",
+            "srch",
+            "recherche",
+            "rechercher",
+            "cerca",
+            "ricerca",
+            "suche",
+            "suchen",
+            "поиск",
+            "искать",
+            "搜索",
+            "查找",
+            "搜寻",
+            "搜尋",
+            "查找",
+            "搜尋",
+            "検索",
+            "探す",
+            "검색",
+            "찾기",
+            "بحث",
+            "البحث",
+            "ara",
+            "arama",
+            "zoeken",
+            "zoek",
+            "खोज",
+            "तलाश",
+            "cari",
+            "tìm kiếm",
+            "ค้นหา",
+            "חיפוש",
+            "αναζήτηση",
+            "archd",
+            "archv",
+          ].includes(
+            p.parentElement
+              ?.getAttribute("aria-label")
+              ?.trim()
+              .toLowerCase()
+              .replace(/\s.*/g, "")
+          )
         );
       return {
         archive,
@@ -330,6 +384,7 @@ function addWhatsAppKbShortcuts() {
         more,
         ngrp,
         close,
+        search,
       };
     },
     archiveCb = (e) => {
@@ -450,7 +505,7 @@ function addWhatsAppKbShortcuts() {
         ?.click();
     },
     allCb = (e) => {
-      if (!((e.key.toLowerCase() === "q" || e.keyCode === 81) && e.altKey))
+      if (!((e.key?.toLowerCase() === "q" || e.keyCode === 81) && e.altKey))
         return;
       (
         document.getElementById("all-filter") ??
@@ -481,7 +536,7 @@ function addWhatsAppKbShortcuts() {
       )?.click();
     },
     unreadCb = (e) => {
-      if (!((e.key.toLowerCase() === "w" || e.keyCode === 87) && e.altKey))
+      if (!((e.key?.toLowerCase() === "w" || e.keyCode === 87) && e.altKey))
         return;
       (
         document.getElementById("unread-filter") ??
@@ -513,7 +568,7 @@ function addWhatsAppKbShortcuts() {
       )?.click();
     },
     fvtCb = (e) => {
-      if (!((e.key.toLowerCase() === "a" || e.keyCode === 65) && e.altKey))
+      if (!((e.key?.toLowerCase() === "a" || e.keyCode === 65) && e.altKey))
         return;
       (
         document.getElementById("favorites-filter") ??
@@ -545,7 +600,7 @@ function addWhatsAppKbShortcuts() {
       )?.click();
     },
     groupsCb = (e) => {
-      if (!((e.key.toLowerCase() === "s" || e.keyCode === 83) && e.altKey))
+      if (!((e.key?.toLowerCase() === "s" || e.keyCode === 83) && e.altKey))
         return;
       (
         document.getElementById("group-filter") ??
@@ -576,7 +631,7 @@ function addWhatsAppKbShortcuts() {
       )?.click();
     },
     moreCb = (e) => {
-      if (!((e.key.toLowerCase() === "m" || e.keyCode === 77) && e.altKey))
+      if (!((e.key?.toLowerCase() === "m" || e.keyCode === 77) && e.altKey))
         return;
       [...document.getElementsByTagName("button")]
         .filter(
@@ -596,7 +651,7 @@ function addWhatsAppKbShortcuts() {
         ?.click();
     },
     ngrpCb = (e) => {
-      if (!((e.key.toLowerCase() === "n" || e.keyCode === 78) && e.altKey))
+      if (!((e.key?.toLowerCase() === "n" || e.keyCode === 78) && e.altKey))
         return;
       [...document.getElementsByTagName("li")]
         .flatMap((e) => [
@@ -631,7 +686,7 @@ function addWhatsAppKbShortcuts() {
         ?.click();
     },
     closeCb = (e) => {
-      if (!((e.key.toLowerCase() === "b" || e.keyCode === 66) && e.altKey))
+      if (!((e.key?.toLowerCase() === "b" || e.keyCode === 66) && e.altKey))
         return;
       [...document.querySelectorAll('div[role="button"]')]
         .find(
@@ -708,9 +763,105 @@ function addWhatsAppKbShortcuts() {
             )
         )
         ?.click();
+    },
+    searchCb = (e) => {
+      if (!((e.key?.toLowerCase() === "l" || e.keyCode === 76) && e.altKey))
+        return;
+      const p = [
+          ...document.querySelectorAll("p.selectable-text.copyable-text"),
+        ].find((p) =>
+          [
+            "pesquisar",
+            "busca",
+            "procurar",
+            "buscar",
+            "búsqueda",
+            "search",
+            "find",
+            "lookup",
+            "srch",
+            "recherche",
+            "rechercher",
+            "cerca",
+            "ricerca",
+            "suche",
+            "suchen",
+            "поиск",
+            "искать",
+            "搜索",
+            "查找",
+            "搜寻",
+            "搜尋",
+            "查找",
+            "搜尋",
+            "検索",
+            "探す",
+            "검색",
+            "찾기",
+            "بحث",
+            "البحث",
+            "ara",
+            "arama",
+            "zoeken",
+            "zoek",
+            "खोज",
+            "तलाश",
+            "cari",
+            "tìm kiếm",
+            "ค้นหา",
+            "חיפוש",
+            "αναζήτηση",
+            "archd",
+            "archv",
+          ].includes(
+            p?.parentElement
+              ?.getAttribute("aria-label")
+              ?.trim()
+              .toLowerCase()
+              .replace(/\s.*/g, "")
+          )
+        ),
+        parents = [];
+      let currEl = p.parentElement,
+        acc = 0;
+      while (p && currEl) {
+        parents.push(currEl);
+        currEl = currEl?.parentElement;
+        if (acc >= 10 || currEl === document.body) break;
+        acc += 1;
+      }
+      const editable = parents.filter(Boolean).find((p) => p.contentEditable);
+      editable?.focus();
+      setTimeout(() => {
+        if (!editable?.isConnected) return;
+        editable.click();
+        const prevTi = editable.getAttribute("tabindex");
+        editable.setAttribute("tabindex", "-1");
+        setTimeout(() => {
+          if (!editable?.isConnected) return;
+          editable?.dispatchEvent(
+            new KeyboardEvent("keydown", {
+              key: "Tab",
+              code: "Tab",
+              bubbles: true,
+            })
+          );
+          editable.setAttribute("tabindex", prevTi);
+        }, 50);
+      }, 50);
     };
-  const { archive, back, all, unread, favourites, groups, more, ngrp, close } =
-    queryAllElements();
+  const {
+    archive,
+    back,
+    all,
+    unread,
+    favourites,
+    groups,
+    more,
+    ngrp,
+    close,
+    search,
+  } = queryAllElements();
   for (const { e, cb } of [
     {
       e: archive,
@@ -748,6 +899,10 @@ function addWhatsAppKbShortcuts() {
       e: close,
       cb: closeCb,
     },
+    {
+      e: search,
+      cb: searchCb,
+    },
   ]) {
     if (e instanceof HTMLElement && e.dataset.listening === "true") {
       e.removeAttribute("data-listening");
@@ -755,8 +910,17 @@ function addWhatsAppKbShortcuts() {
     }
   }
   setInterval(() => {
-    const { archive, back, all, unread, favourites, groups, more, ngrp } =
-      queryAllElements();
+    const {
+      archive,
+      back,
+      all,
+      unread,
+      favourites,
+      groups,
+      more,
+      ngrp,
+      search,
+    } = queryAllElements();
     for (const { e, cb } of [
       {
         e: archive,
@@ -794,6 +958,10 @@ function addWhatsAppKbShortcuts() {
         e: close,
         cb: closeCb,
       },
+      {
+        e: search,
+        cb: searchCb,
+      },
     ]) {
       if (e instanceof HTMLElement && e.dataset.listening !== "true") {
         window.addEventListener("keydown", cb);
@@ -802,7 +970,6 @@ function addWhatsAppKbShortcuts() {
     }
   }, 500);
 }
-
 /**
 * Version with shortcuts only for tab buttons for types of messages
 **/
@@ -1349,6 +1516,181 @@ function addWhatsAppKbShortcuts__ArchiveOnly() {
       {
         e: back,
         cb: backCb,
+      },
+    ]) {
+      if (e instanceof HTMLElement && e.dataset.listening !== "true") {
+        window.addEventListener("keydown", cb);
+        e.dataset.listening = "true";
+      }
+    }
+  }, 500);
+}
+
+// Version only for searching
+function addWhatsAppShortcuts__SearchOnly() {
+  const queryAllElements = () => {
+      const search = [
+        ...document.querySelectorAll("p.selectable-text.copyable-text"),
+      ].find((p) =>
+        [
+          "pesquisar",
+          "busca",
+          "procurar",
+          "buscar",
+          "búsqueda",
+          "search",
+          "find",
+          "lookup",
+          "srch",
+          "recherche",
+          "rechercher",
+          "cerca",
+          "ricerca",
+          "suche",
+          "suchen",
+          "поиск",
+          "искать",
+          "搜索",
+          "查找",
+          "搜寻",
+          "搜尋",
+          "查找",
+          "搜尋",
+          "検索",
+          "探す",
+          "검색",
+          "찾기",
+          "بحث",
+          "البحث",
+          "ara",
+          "arama",
+          "zoeken",
+          "zoek",
+          "खोज",
+          "तलाश",
+          "cari",
+          "tìm kiếm",
+          "ค้นหา",
+          "חיפוש",
+          "αναζήτηση",
+          "archd",
+          "archv",
+        ].includes(
+          p.parentElement
+            ?.getAttribute("aria-label")
+            ?.trim()
+            .toLowerCase()
+            .replace(/\s.*/g, "")
+        )
+      );
+      return {
+        search,
+      };
+    },
+    searchCb = (e) => {
+      if (!((e.key?.toLowerCase() === "l" || e.keyCode === 76) && e.altKey))
+        return;
+      const p = [
+          ...document.querySelectorAll("p.selectable-text.copyable-text"),
+        ].find((p) =>
+          [
+            "pesquisar",
+            "busca",
+            "procurar",
+            "buscar",
+            "búsqueda",
+            "search",
+            "find",
+            "lookup",
+            "srch",
+            "recherche",
+            "rechercher",
+            "cerca",
+            "ricerca",
+            "suche",
+            "suchen",
+            "поиск",
+            "искать",
+            "搜索",
+            "查找",
+            "搜寻",
+            "搜尋",
+            "查找",
+            "搜尋",
+            "検索",
+            "探す",
+            "검색",
+            "찾기",
+            "بحث",
+            "البحث",
+            "ara",
+            "arama",
+            "zoeken",
+            "zoek",
+            "खोज",
+            "तलाश",
+            "cari",
+            "tìm kiếm",
+            "ค้นหา",
+            "חיפוש",
+            "αναζήτηση",
+            "archd",
+            "archv",
+          ].includes(
+            p?.parentElement
+              ?.getAttribute("aria-label")
+              ?.trim()
+              .toLowerCase()
+              .replace(/\s.*/g, "")
+          )
+        ),
+        parents = [];
+      let currEl = p.parentElement,
+        acc = 0;
+      while (p && currEl) {
+        parents.push(currEl);
+        currEl = currEl?.parentElement;
+        if (acc >= 10 || currEl === document.body) break;
+        acc += 1;
+      }
+      const editable = parents.filter(Boolean).find((p) => p.contentEditable);
+      editable?.focus();
+      setTimeout(() => {
+        if (!editable?.isConnected) return;
+        editable.click();
+        const prevTi = editable.getAttribute("tabindex");
+        editable.setAttribute("tabindex", "-1");
+        setTimeout(() => {
+          if (!editable?.isConnected) return;
+          editable?.dispatchEvent(
+            new KeyboardEvent("keydown", {
+              key: "Tab",
+              code: "Tab",
+              bubbles: true,
+            })
+          );
+          editable.setAttribute("tabindex", prevTi);
+        }, 50);
+      }, 50);
+    };
+  const { search } = queryAllElements();
+  for (const { e, cb } of [
+    {
+      e: search,
+      cb: searchCb,
+    },
+  ]) {
+    if (e instanceof HTMLElement && e.dataset.listening === "true") {
+      e.removeAttribute("data-listening");
+      window.removeEventListener("keydown", cb);
+    }
+  }
+  setInterval(() => {
+    const { search } = queryAllElements();
+    for (const { e, cb } of [
+      {
+        e: search,
+        cb: searchCb,
       },
     ]) {
       if (e instanceof HTMLElement && e.dataset.listening !== "true") {
