@@ -8,6 +8,7 @@
   6. Alt + s => Group messages tab
   7. Alt + m => More options click
   8. Alt + n = Create new group
+  9. Alt + b => Close new group drawer
   NOTE: !! THIS NEEDS TO BE REACTIVATED EVERY TIME YOU LOAD THE WEBPAGE !!
 **/
 
