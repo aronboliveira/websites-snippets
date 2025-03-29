@@ -2,7 +2,7 @@
 
 Functions for quickly navigating or doing tasks in popular websites.
 
-Save the commented out version as a bookmark for usage through clicking, or write them in the console!
+Save the minified version as a bookmark for usage through clicking, or write them in the console!
 
 ⚠ IMPORTANT: These snippets **DO NOT PERSIST** through sessions. You have to click on them after every page load you wish to use them.
 
