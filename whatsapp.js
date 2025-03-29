@@ -1025,37 +1025,6 @@ function addWhatsAppKbShortcuts__ArchiveOnly() {
         )
         .at(0)
         ?.click();
-    },
-    allCb = (e) => {
-      if (!((e.key.toLowerCase() === "q" || e.keyCode === 81) && e.altKey))
-        return;
-      (
-        document.getElementById("all-filter") ??
-        tabBtns.find((b) => {
-          const t = b.innerText?.trim().toLowerCase();
-          return [
-            "all",
-            "todos",
-            "tout",
-            "alle",
-            "tutti",
-            "все",
-            "全部",
-            "すべて",
-            "전체",
-            "الكل",
-            "सभी",
-            "সব",
-            "تمام",
-            "semua",
-            "tất cả",
-            "tümü",
-            "wszystko",
-            "allemaal",
-            "all",
-          ].includes(t);
-        })
-      )?.click();
     };
   const { archive, back } = queryAllElements();
   for (const { e, cb } of [
@@ -1074,17 +1043,7 @@ function addWhatsAppKbShortcuts__ArchiveOnly() {
     }
   }
   setInterval(() => {
-    const {
-      archive,
-      back,
-      all,
-      unread,
-      favourites,
-      groups,
-      more,
-      ngrp,
-      close,
-    } = queryAllElements();
+    const { archive, back } = queryAllElements();
     for (const { e, cb } of [
       {
         e: archive,
@@ -1093,34 +1052,6 @@ function addWhatsAppKbShortcuts__ArchiveOnly() {
       {
         e: back,
         cb: backCb,
-      },
-      {
-        e: all,
-        cb: allCb,
-      },
-      {
-        e: unread,
-        cb: unreadCb,
-      },
-      {
-        e: favourites,
-        cb: fvtCb,
-      },
-      {
-        e: groups,
-        cb: groupsCb,
-      },
-      {
-        e: more,
-        cb: moreCb,
-      },
-      {
-        e: ngrp,
-        cb: ngrpCb,
-      },
-      {
-        e: close,
-        cb: closeCb,
       },
     ]) {
       if (e instanceof HTMLElement && e.dataset.listening !== "true") {
