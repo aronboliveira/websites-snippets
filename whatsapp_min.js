@@ -9,6 +9,7 @@
   7. Alt + m => More options click
   8. Alt + n = Create new group
   9. Alt + b => Close new group drawer
+  10. Alt + l => Focus in search bar (for typing)
   NOTE: !! THIS NEEDS TO BE REACTIVATED EVERY TIME YOU LOAD THE WEBPAGE !!
   -> Pick the version of your preference and copy ONLY one line starting with javascript
 **/
