@@ -802,3 +802,331 @@ function addWhatsAppKbShortcuts() {
     }
   }, 500);
 }
+
+/**
+* Version with shortcuts only for archives
+**/
+
+function addWhatsAppKbShortcuts__ArchiveOnly() {
+  const queryAllElements = () => {
+      const archive = [...(document.body?.getElementsByTagName("button") || [])]
+          .filter((b) => {
+            const al = b.getAttribute("aria-label"),
+              t = b.innerText;
+            return [
+              "arquivado",
+              "arquivados",
+              "arquivada",
+              "arquivadas",
+              "arq.",
+              "archived",
+              "archive",
+              "arch.",
+              "archivado",
+              "archivados",
+              "archivada",
+              "archivadas",
+              "archivé",
+              "archivée",
+              "archivés",
+              "archivées",
+              "archiviato",
+              "archiviati",
+              "archiviata",
+              "archiviate",
+              "archiviert",
+              "archiv",
+              "архив",
+              "архивирован",
+              "архивировано",
+              "архивированы",
+              "архивирована",
+              "已归档",
+              "归档",
+              "存档",
+              "已歸檔",
+              "歸檔",
+              "存檔",
+              "アーカイブ",
+              "アーカイブ済み",
+              "保存済み",
+              "保管済み",
+              "보관됨",
+              "아카이브",
+              "보관",
+              "مؤرشف",
+              "أرشفة",
+              "محفوظ",
+              "الملفات المؤرشفة",
+              "arşivlendi",
+              "arşiv",
+              "gearchiveerd",
+              "archief",
+              "आर्काइव्ड",
+              "संग्रहित",
+              "अभिलेखागार",
+              "diarsipkan",
+              "arsip",
+              "đã lưu trữ",
+              "lưu trữ",
+              "ที่เก็บถาวร",
+              "เก็บถาวร",
+              "בארכיון",
+              "ארכיון",
+              "αρχειοθετημένα",
+              "αρχειοθέτηση",
+              "arc.",
+              "archd",
+              "archv",
+            ].some((l) =>
+              [al, t].some(
+                (t) =>
+                  t?.toString().trim().toLowerCase() === l.trim().toLowerCase()
+              )
+            );
+          })
+          .at(0),
+        back = [...document.getElementsByTagName("header")]
+          .filter(
+            (h) =>
+              h.getElementsByTagName("button") ||
+              h.querySelector('[role="button"]')
+          )
+          .flatMap((h) => [
+            ...h.getElementsByTagName("button"),
+            ...h.querySelectorAll('[role="button"]'),
+          ])
+          .filter((b) =>
+            [b.getAttribute("aria-label"), b.getAttribute("data-icon")].some(
+              (l) =>
+                l?.toLowerCase().trim() === "back" ||
+                l?.toLowerCase().trim().startsWith("back-")
+            )
+          )
+          .at(0);
+      return {
+        archive,
+        back,
+      };
+    },
+    archiveCb = (e) => {
+      if (
+        !(
+          (e.key === "ArrowRight" || e.key === "Right" || e.keyCode === 39) &&
+          e.ctrlKey
+        )
+      )
+        return;
+      e.preventDefault();
+      [...(document.body?.getElementsByTagName("button") || [])]
+        .filter((b) => {
+          const al = b.getAttribute("aria-label"),
+            t = b.innerText;
+          return [
+            "arquivado",
+            "arquivados",
+            "arquivada",
+            "arquivadas",
+            "arq.",
+            "archived",
+            "archive",
+            "arch.",
+            "archivado",
+            "archivados",
+            "archivada",
+            "archivadas",
+            "archivé",
+            "archivée",
+            "archivés",
+            "archivées",
+            "archiviato",
+            "archiviati",
+            "archiviata",
+            "archiviate",
+            "archiviert",
+            "archiv",
+            "архив",
+            "архивирован",
+            "архивировано",
+            "архивированы",
+            "архивирована",
+            "已归档",
+            "归档",
+            "存档",
+            "已歸檔",
+            "歸檔",
+            "存檔",
+            "アーカイブ",
+            "アーカイブ済み",
+            "保存済み",
+            "保管済み",
+            "보관됨",
+            "아카이브",
+            "보관",
+            "مؤرشف",
+            "أرشفة",
+            "محفوظ",
+            "الملفات المؤرشفة",
+            "arşivlendi",
+            "arşiv",
+            "gearchiveerd",
+            "archief",
+            "आर्काइव्ड",
+            "संग्रहित",
+            "अभिलेखागार",
+            "diarsipkan",
+            "arsip",
+            "đã lưu trữ",
+            "lưu trữ",
+            "ที่เก็บถาวร",
+            "เก็บถาวร",
+            "בארכיון",
+            "ארכיון",
+            "αρχειοθετημένα",
+            "αρχειοθέτηση",
+            "arc.",
+            "archd",
+            "archv",
+          ].some((l) =>
+            [al, t].some(
+              (t) =>
+                t?.toString().trim().toLowerCase() === l.trim().toLowerCase()
+            )
+          );
+        })
+        .at(0)
+        ?.click();
+    },
+    backCb = (e) => {
+      if (
+        !(
+          (e.key === "ArrowLeft" || e.key === "Left" || e.keyCode === 37) &&
+          e.ctrlKey
+        )
+      )
+        return;
+      e.preventDefault();
+      [...document.getElementsByTagName("header")]
+        .filter(
+          (h) =>
+            h.getElementsByTagName("button") ||
+            h.querySelector('[role="button"]')
+        )
+        .flatMap((h) => [
+          ...h.getElementsByTagName("button"),
+          ...h.querySelectorAll('[role="button"]'),
+        ])
+        .filter((b) =>
+          [b.getAttribute("aria-label"), b.getAttribute("data-icon")].some(
+            (l) =>
+              l?.toLowerCase().trim() === "back" ||
+              l?.toLowerCase().trim().startsWith("back-")
+          )
+        )
+        .at(0)
+        ?.click();
+    },
+    allCb = (e) => {
+      if (!((e.key.toLowerCase() === "q" || e.keyCode === 81) && e.altKey))
+        return;
+      (
+        document.getElementById("all-filter") ??
+        tabBtns.find((b) => {
+          const t = b.innerText?.trim().toLowerCase();
+          return [
+            "all",
+            "todos",
+            "tout",
+            "alle",
+            "tutti",
+            "все",
+            "全部",
+            "すべて",
+            "전체",
+            "الكل",
+            "सभी",
+            "সব",
+            "تمام",
+            "semua",
+            "tất cả",
+            "tümü",
+            "wszystko",
+            "allemaal",
+            "all",
+          ].includes(t);
+        })
+      )?.click();
+    };
+  const { archive, back } = queryAllElements();
+  for (const { e, cb } of [
+    {
+      e: archive,
+      cb: archiveCb,
+    },
+    {
+      e: back,
+      cb: backCb,
+    },
+  ]) {
+    if (e instanceof HTMLElement && e.dataset.listening === "true") {
+      e.removeAttribute("data-listening");
+      window.removeEventListener("keydown", cb);
+    }
+  }
+  setInterval(() => {
+    const {
+      archive,
+      back,
+      all,
+      unread,
+      favourites,
+      groups,
+      more,
+      ngrp,
+      close,
+    } = queryAllElements();
+    for (const { e, cb } of [
+      {
+        e: archive,
+        cb: archiveCb,
+      },
+      {
+        e: back,
+        cb: backCb,
+      },
+      {
+        e: all,
+        cb: allCb,
+      },
+      {
+        e: unread,
+        cb: unreadCb,
+      },
+      {
+        e: favourites,
+        cb: fvtCb,
+      },
+      {
+        e: groups,
+        cb: groupsCb,
+      },
+      {
+        e: more,
+        cb: moreCb,
+      },
+      {
+        e: ngrp,
+        cb: ngrpCb,
+      },
+      {
+        e: close,
+        cb: closeCb,
+      },
+    ]) {
+      if (e instanceof HTMLElement && e.dataset.listening !== "true") {
+        window.addEventListener("keydown", cb);
+        e.dataset.listening = "true";
+      }
+    }
+  }, 500);
+}
