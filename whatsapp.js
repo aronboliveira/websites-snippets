@@ -1700,3 +1700,221 @@ function addWhatsAppShortcuts__SearchOnly() {
     }
   }, 500);
 }
+
+function addChatsLIsKeyBindings() {
+  const archivedLabels = [
+      "arquivado",
+      "arquivados",
+      "arquivada",
+      "arquivadas",
+      "arq.",
+      "archived",
+      "archive",
+      "arch.",
+      "archivado",
+      "archivados",
+      "archivada",
+      "archivadas",
+      "archivé",
+      "archivée",
+      "archivés",
+      "archivées",
+      "archiviato",
+      "archiviati",
+      "archiviata",
+      "archiviate",
+      "archiviert",
+      "archiv",
+      "архив",
+      "архивирован",
+      "архивировано",
+      "архивированы",
+      "архивирована",
+      "已归档",
+      "归档",
+      "存档",
+      "已歸檔",
+      "歸檔",
+      "存檔",
+      "アーカイブ",
+      "アーカイブ済み",
+      "保存済み",
+      "保管済み",
+      "보관됨",
+      "아카이브",
+      "보관",
+      "مؤرشف",
+      "أرشفة",
+      "محفوظ",
+      "الملفات المؤرشفة",
+      "arşivlendi",
+      "arşiv",
+      "gearchiveerd",
+      "archief",
+      "आर्काइव्ड",
+      "संग्रहित",
+      "अभिलेखागार",
+      "diarsipkan",
+      "arsip",
+      "đã lưu trữ",
+      "lưu trữ",
+      "ที่เก็บถาวร",
+      "เก็บถาวร",
+      "בארכיון",
+      "ארכיון",
+      "αρχειοθετημένα",
+      "αρχειοθέτηση",
+      "arc.",
+      "archd",
+      "archv",
+    ],
+    queryForArchived = () => {
+      return [
+        ...([...document.body.querySelectorAll("*")]
+          .filter(
+            e =>
+              (e instanceof HTMLHeadingElement || e.tagName === "HEADER") &&
+              archivedLabels.includes(e.innerText?.trim().toLowerCase())
+          )
+          .at(0)
+          ?.closest(".copyable-area")
+          ?.querySelectorAll("*") ?? []),
+      ].find(e => [...e.children].some(c => c.role === "listitem"));
+    },
+    queryForGrids = () => {
+      return {
+        g:
+          [
+            ...(document.body?.querySelectorAll('div[role="grid"]') || []),
+          ].filter(gr => {
+            const t = gr.getAttribute("aria-label")?.trim().toLowerCase();
+            return [
+              "chat list",
+              "conversation list",
+              "message list",
+              "lista de chats",
+              "lista de conversas",
+              "lista de conversaciones",
+              "liste de chats",
+              "liste de conversations",
+              "elenco chat",
+              "elenco conversazioni",
+              "Chat-Liste",
+              "Konversationsliste",
+              "lijst van chats",
+              "gesprekkenlijst",
+              "λίστα συνομιλιών",
+              "λίστα συζητήσεων",
+              "チャットリスト",
+              "会話リスト",
+              "채팅 목록",
+              "대화 목록",
+              "รายการแชท",
+              "รายการสนทนา",
+              "daftar obrolan",
+              "daftar percakapan",
+              "danh sách trò chuyện",
+              "danh sách hội thoại",
+              "список чатов",
+              "список бесед",
+              "قائمة الدردشة",
+              "قائمة المحادثات",
+              "רשימת צ'אטים",
+              "רשימת שיחות",
+              "चैट सूची",
+              "वार्तालाप सूची",
+              "চ্যাট তালিকা",
+              "কথোপকথন তালিকা",
+              "聊天列表",
+              "对话列表",
+              "聊天清單",
+              "對話清單",
+            ].includes(t);
+          })[0] ?? document.body,
+        ag: queryForArchived(),
+      };
+    },
+    liCb = (ev, g) => {
+      const isArchived = () =>
+        [
+          ...(queryForArchived()
+            ?.closest(".copyable-area")
+            ?.querySelectorAll("*") ?? []),
+        ].some(
+          e =>
+            (e instanceof HTMLHeadingElement || e?.tagName === "HEADER") &&
+            archivedLabels.includes(e.innerText?.trim().toLowerCase())
+        );
+      ev.altKey && ev.preventDefault();
+      const singleNums = Array.from({ length: 9 }).map((_, i) => i + 1),
+        parsed = parseInt(ev.key, 10);
+      if (isArchived()) g = queryForArchived();
+      if (
+        !(
+          g instanceof HTMLElement &&
+          g.isConnected &&
+          ev.altKey &&
+          (singleNums.map(i => i.toString()).includes(ev.key) ||
+            singleNums.map(i => i + 48).includes(ev.keyCode))
+        ) ||
+        !Number.isFinite(parsed)
+      )
+        return;
+      let lis = g.querySelectorAll('[role="listitem"]');
+      if (lis.length < parsed) return;
+      lis = Array.from(lis).sort(
+        (a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top
+      );
+      const li = lis[parsed - 1];
+      if (!li?.isConnected) return;
+      const liDescendants = li.querySelectorAll("*"),
+        selectable =
+          [...liDescendants].filter(c =>
+            ["true", "false"].includes(c.getAttribute("aria-selected"))
+          )[0] ||
+          (() => {
+            if (!(li.firstElementChild instanceof HTMLElement)) return null;
+            return [...li.firstElementChild.children].filter(c =>
+              c.getAttribute("tabindex")
+            )[0];
+          })(),
+        apBox =
+          li.querySelector(".api1-") ||
+          [...li.querySelectorAll("._ap1_")].find(c =>
+            [...(c.children || [])].some(cc => cc?.classList?.contains("_ap1_"))
+          );
+      [selectable, apBox].forEach(el => {
+        if (!(el instanceof HTMLElement) || !el?.isConnected) return;
+        const rect = el.getBoundingClientRect(),
+          cX = Math.round(rect.x + rect.width * 0.5),
+          cY = Math.round(rect.y + rect.height * 0.5),
+          ops = {
+            bubbles: true,
+            cancelable: true,
+            view: window,
+            clientX: cX,
+            clientY: cY,
+          },
+          ti = el.getAttribute("tabindex");
+        el.tabIndex = 0;
+        el.focus();
+        for (const e of ["mousedown", "mouseup", "click"])
+          el.dispatchEvent(new MouseEvent(e, ops));
+        ti ? el.setAttribute("tabindex", ti) : el.removeAttribute("tabindex");
+      });
+    };
+  setInterval(() => {
+    const { g, ag } = queryForGrids();
+    for (const gr of [g, ag]) {
+      if (!(gr instanceof HTMLElement)) return;
+      if (!gr.isConnected) {
+        window.removeEventListener("keydown", liCb);
+        gr.dataset.listening = "false";
+        return;
+      }
+      if (gr.dataset.listening === "true") return;
+      window.addEventListener("keydown", ev => liCb(ev, gr));
+      gr.dataset.listening = "true";
+    }
+  }, 500);
+}
