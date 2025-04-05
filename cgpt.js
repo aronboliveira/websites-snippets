@@ -1,7 +1,7 @@
 /**
 *
 * Opens the radix floating menu for changing the menu with Alt + '
-* CURRENTLY ONLY WORKS WITH PROJECTS
+* Choose the model with indexed menuitems by using Alt + [number, from 1 to 9]
 * returns {void}
 **/
 function openGPTModelsRadixDropDown() {
