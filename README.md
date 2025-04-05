@@ -16,7 +16,8 @@ Save the minified version as a bookmark for usage through clicking, or write the
 
 ## 🌐 Step-by-Step Instructions (All Languages)
 
-### 🇧🇷 Português (Brasileiro)
+<details>
+<summary><strong>🇧🇷 Português (Brasileiro)</strong></summary>
 
 1. **Abra o Gerenciador de Favoritos**  
    `Ctrl + Shift + O` (Windows/Linux) ou `⌘ + Shift + O` (Mac)
@@ -25,15 +26,15 @@ Save the minified version as a bookmark for usage through clicking, or write the
     - **Nome:** `Atalho Privado`
     - **URL:**
         ```
-            /*COLE_AQUI_O_CÓDIGO_COMPLETO_SEM_COMENTÁRIOS*/
+        /*COLE_AQUI_O_CÓDIGO_COMPLETO_SEM_COMENTÁRIOS*/
         ```
         ✅ **Código correto:**  
          `javascript:(()=>{...})();` (sua versão minificada)  
          🚫 **NUNCA inclua** `/** comentários */` ou linhas com `//`
+</details>
 
----
-
-### 🇺🇸 English (International)
+<details>
+<summary><strong>🇺🇸 English (International)</strong></summary>
 
 1. **Open Bookmark Manager**  
    `Ctrl + Shift + O` (Win/Linux) / `⌘ + Shift + O` (Mac)
@@ -42,15 +43,15 @@ Save the minified version as a bookmark for usage through clicking, or write the
     - **Name:** `Private Shortcut`
     - **URL:**
         ```
-            /*PASTE_FULL_CODE_WITHOUT_COMMENTS*/
+        /*PASTE_FULL_CODE_WITHOUT_COMMENTS*/
         ```
         ✅ **Valid format:**  
          `javascript:(()=>{...})();` (your minified code)  
          🚫 **NEVER include** `/** comments */` or `//` lines
+</details>
 
----
-
-### 🇪🇸 Español (Latinoamérica)
+<details>
+<summary><strong>🇪🇸 Español (Latinoamérica)</strong></summary>
 
 1. **Abrir Administrador de marcadores**  
    `Ctrl + Shift + O` (Windows/Linux) / `⌘ + Shift + O` (Mac)
@@ -59,15 +60,15 @@ Save the minified version as a bookmark for usage through clicking, or write the
     - **Nombre:** `Acceso Privado`
     - **URL:**
         ```
-            /*PEGA_CÓDIGO_COMPLETO_SIN_COMENTARIOS*/
+        /*PEGA_CÓDIGO_COMPLETO_SIN_COMENTARIOS*/
         ```
         ✅ **Formato válido:**  
          `javascript:(()=>{...})();` (tu código minificado)  
          🚫 **NUNCA copies** `/** comentarios */` o líneas con `//`
+</details>
 
----
-
-### 🇮🇹 Italiano
+<details>
+<summary><strong>🇮🇹 Italiano</strong></summary>
 
 1. **Apri Gestione segnalibri**  
    `Ctrl + Shift + O` (Win/Linux) / `⌘ + Shift + O` (Mac)
@@ -76,15 +77,15 @@ Save the minified version as a bookmark for usage through clicking, or write the
     - **Nome:** `Scorciatoia Privata`
     - **URL:**
         ```
-            /*INCOLLA_CODICE_COMPLETO_SENZA_COMMENTI*/
+        /*INCOLLA_CODICE_COMPLETO_SENZA_COMMENTI*/
         ```
         ✅ **Formato corretto:**  
          `javascript:(()=>{...})();` (il tuo codice minificato)  
          🚫 **NON includere** `/** commenti */` o righe con `//`
+</details>
 
----
-
-### 🇫🇷 Français
+<details>
+<summary><strong>🇫🇷 Français</strong></summary>
 
 1. **Ouvrir Gestionnaire de marque-pages**  
    `Ctrl + Maj + O` (Win/Linux) / `⌘ + Maj + O` (Mac)
@@ -93,15 +94,15 @@ Save the minified version as a bookmark for usage through clicking, or write the
     - **Nom:** `Raccourci Privé`
     - **URL:**
         ```
-            /*COLLEZ_CODE_COMPLET_SANS_COMMENTAIRES*/
+        /*COLLEZ_CODE_COMPLET_SANS_COMMENTAIRES*/
         ```
         ✅ **Format valide:**  
          `javascript:(()=>{...})();` (votre code minifié)  
          🚫 **N'incluez JAMAIS** `/** commentaires */` ou lignes `//`
+</details>
 
----
-
-### 🇨🇳 中文 (简体)
+<details>
+<summary><strong>🇨🇳 中文 (简体)</strong></summary>
 
 1. **打开书签管理器**  
    `Ctrl + Shift + O` (Win/Linux) / `⌘ + Shift + O` (Mac)
@@ -110,15 +111,15 @@ Save the minified version as a bookmark for usage through clicking, or write the
     - **名称:** `私人快捷方式`
     - **地址:**
         ```
-            /*粘贴完整无注释的代码*/
+        /*粘贴完整无注释的代码*/
         ```
         ✅ **正确格式:**  
          `javascript:(()=>{...})();` (你的压缩代码)  
          🚫 **不要复制** `/** 注释 */` 或 `//` 开头的行
+</details>
 
----
-
-### 🇯🇵 日本語
+<details>
+<summary><strong>🇯🇵 日本語</strong></summary>
 
 1. **ブックマークマネージャーを開く**  
    `Ctrl + Shift + O` (Win/Linux) / `⌘ + Shift + O` (Mac)
@@ -127,15 +128,15 @@ Save the minified version as a bookmark for usage through clicking, or write the
     - **名前:** `プライベートショートカット`
     - **URL:**
         ```
-            /*コメントなしの完全なコードを貼り付け*/
+        /*コメントなしの完全なコードを貼り付け*/
         ```
         ✅ **正しい形式:**  
          `javascript:(()=>{...})();` (圧縮されたコード)  
          🚫 `/** コメント */` や `//` 行は含めないでください
+</details>
 
----
-
-### 🇷🇺 Русский
+<details>
+<summary><strong>🇷🇺 Русский</strong></summary>
 
 1. **Откройте Менеджер закладок**  
    `Ctrl + Shift + O` (Win/Linux) / `⌘ + Shift + O` (Mac)
@@ -144,15 +145,15 @@ Save the minified version as a bookmark for usage through clicking, or write the
     - **Имя:** `Приватный ярлык`
     - **URL:**
         ```
-            /*ВСТАВЬТЕ_ПОЛНЫЙ_КОД_БЕЗ_КОММЕНТАРИЕВ*/
+        /*ВСТАВЬТЕ_ПОЛНЫЙ_КОД_БЕЗ_КОММЕНТАРИЕВ*/
         ```
         ✅ **Правильный формат:**  
          `javascript:(()=>{...})();` (ваш минифицированный код)  
          🚫 **Никогда не копируйте** `/** комментарии */` или строки с `//`
+</details>
 
----
-
-### 🇸🇦 العربية
+<details>
+<summary><strong>🇸🇦 العربية</strong></summary>
 
 1. **افتح مدير الإشارات**  
    `Ctrl + Shift + O` (Win/Linux) / `⌘ + Shift + O` (Mac)
@@ -161,11 +162,12 @@ Save the minified version as a bookmark for usage through clicking, or write the
     - **الاسم:** `اختصار خاص`
     - **الرابط:**
         ```
-            /*الصق_الكود_الكامل_بدون_تعليقات*/
+        /*الصق_الكود_الكامل_بدون_تعليقات*/
         ```
         ✅ **التنسيق الصحيح:**  
          `javascript:(()=>{...})();` (الكود المضغوط الخاص بك)  
          🚫 **لا تنسخ أبدًا** `/** تعليقات */` أو أسطر `//`
+</details>
 
 ---
 
