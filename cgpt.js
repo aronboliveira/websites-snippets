@@ -75,7 +75,7 @@ function openGPTModelsRadixDropDown() {
               .querySelectorAll("[data-radix-collection]")
               .forEach(erc => {
                 if (erc._radixCollectionState)
-                  erc._radixCollectionState.highlightedItem = item;
+                  erc._radixCollectionState.highlightedItem = el;
               });
           }
           const iv = setInterval(() => {
