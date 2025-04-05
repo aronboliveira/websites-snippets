@@ -6,7 +6,7 @@
 **/
 function openGPTModelsRadixDropDown() {
   handle = ev => {
-    if (!(ev.key === "'" || ev.keyCode === 192) && ev.altKey) return;
+    if (!((ev.key === "'" || ev.keyCode === 192) && ev.altKey)) return;
     let id = "",
       id2 = "",
       shouldTryHover = true;
@@ -247,8 +247,8 @@ function openGPTModelsRadixDropDown() {
               return;
             rm.dataset.state = "open";
             hoverAttempt();
-          }, 50);
-        }, 50),
+          }, 25);
+        }, 25),
         chkInterv = setInterval(() => {
           const btn = queryForButton();
           if (
@@ -264,7 +264,7 @@ function openGPTModelsRadixDropDown() {
         clearInterval(chkInterv);
         cleanUpRadixDropDown();
       }, limit * 1.25);
-    }, 500);
+    }, 250);
   };
-  addEventListener("keydown", handle);
+  window.addEventListener("keydown", handle);
 }
