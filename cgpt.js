@@ -22,81 +22,76 @@ function openGPTModelsRadixDropDown() {
         )
         ?.querySelectorAll('[role="menuitem"]');
     },
+    queryForButton = () => {
+      return [
+        ...([...(document.querySelectorAll(".sticky") ?? [])]
+          .find(e => e.querySelector("img") && e.querySelector("svg"))
+          ?.querySelectorAll(".truncate") ?? []),
+      ]
+        .find(e => e.nextElementSibling instanceof SVGSVGElement)
+        ?.closest("button");
+    },
+    queryForRadixDropDown = () => {
+      const rps = Array.from(document.body.querySelectorAll("*")).filter(e =>
+        e.hasAttribute("data-radix-popper-content-wrapper")
+      );
+      if (rps.length <= 1) return null;
+      return document.getElementById(id);
+    },
+    queryForRadixMenuItem = rpdd => {
+      if (!rpdd?.isConnected) rpdd = queryForRadixDropDown();
+      if (
+        !rpdd ||
+        (rpdd &&
+          !/(new[\s-]?chat|nuevo[\s-]?chat|nueva[\s-]?conversa(c|ç)(ión|ões)|nouveau[\s-]?chat|nuova[\s-]?chat|neuer[\s-]?Chat|nieuwe[\s-]?chat|νέο[\s-]?chat|新しい[\s-]?チャット|새[\s-]?채팅|แชท[\s-]?ใหม่|obrolan[\s-]?baru|trò[\s-]?chuyện[\s-]?mới|новый[\s-]?чат|دردشة[\s-]?جديدة|צ'אט[\s-]?חדש|नया[\s-]?चैट|নতুন[\s-]?চ্যাট|新[\s-]?聊天)/gi.test(
+            rpdd.innerText || ""
+          ))
+      )
+        return null;
+      const rmi = Array.from(rpdd.querySelectorAll('[role="menuitem"]')).find(
+        e =>
+          modelsLabelList.test(e.innerText || "") &&
+          e.getAttribute("aria-controls") &&
+          e.getAttribute("aria-haspopup")
+      );
+      id2 = rmi?.getAttribute("aria-controls");
+      return rmi ?? null;
+    },
+    cleanUpRadixDropDown = () => {
+      const rpdd = queryForRadixDropDown(),
+        rmi = queryForRadixMenuItem(rpdd);
+      if (!rmi && rpdd?.dataset.state === "open") rpdd.dataset.state = "false";
+    },
+    setRadixAttrs = el => {
+      el.setAttribute("data-state", "open");
+      el.setAttribute("data-highlighted", "true");
+      if (el.getAttribute("data-radix-collection-item")) {
+        document.querySelectorAll("[data-radix-collection]").forEach(erc => {
+          if (erc._radixCollectionState)
+            erc._radixCollectionState.highlightedItem = el;
+        });
+      }
+      const iv = setInterval(() => {
+        const ctrld = el.getAttribute("aria-controls");
+        if (!ctrld) return;
+        const ctrlEl = document.getElementById(ctrld);
+        if (!ctrlEl && el.getAttribute("data-state") === "open") {
+          el.setAttribute("data-state", "closed");
+          el.setAttribute("data-highlighted", "false");
+        }
+      }, 100);
+      setTimeout(() => {
+        clearInterval(iv);
+        el.setAttribute("data-state", "closed");
+        el.setAttribute("data-highlighted", "false");
+        const idf1 = document.getElementById(id);
+        if (!idf1?.isConnected) id = "";
+        const idf2 = document.getElementById(id2);
+        if (!idf2?.isConnected) id2 = "";
+      }, 5000);
+    },
     openDDHandle = ev => {
       if (!((ev.key === "'" || ev.keyCode === 192) && ev.altKey)) return;
-      const queryForButton = () => {
-          return [
-            ...([...(document.querySelectorAll(".sticky") ?? [])]
-              .find(e => e.querySelector("img") && e.querySelector("svg"))
-              ?.querySelectorAll(".truncate") ?? []),
-          ]
-            .find(e => e.nextElementSibling instanceof SVGSVGElement)
-            ?.closest("button");
-        },
-        queryForRadixDropDown = () => {
-          const rps = Array.from(document.body.querySelectorAll("*")).filter(
-            e => e.hasAttribute("data-radix-popper-content-wrapper")
-          );
-          if (rps.length <= 1) return null;
-          return document.getElementById(id);
-        },
-        queryForRadixMenuItem = rpdd => {
-          if (!rpdd?.isConnected) rpdd = queryForRadixDropDown();
-          if (
-            !rpdd ||
-            (rpdd &&
-              !/(new[\s-]?chat|nuevo[\s-]?chat|nueva[\s-]?conversa(c|ç)(ión|ões)|nouveau[\s-]?chat|nuova[\s-]?chat|neuer[\s-]?Chat|nieuwe[\s-]?chat|νέο[\s-]?chat|新しい[\s-]?チャット|새[\s-]?채팅|แชท[\s-]?ใหม่|obrolan[\s-]?baru|trò[\s-]?chuyện[\s-]?mới|новый[\s-]?чат|دردشة[\s-]?جديدة|צ'אט[\s-]?חדש|नया[\s-]?चैट|নতুন[\s-]?চ্যাট|新[\s-]?聊天)/gi.test(
-                rpdd.innerText || ""
-              ))
-          )
-            return null;
-          const rmi = Array.from(
-            rpdd.querySelectorAll('[role="menuitem"]')
-          ).find(
-            e =>
-              modelsLabelList.test(e.innerText || "") &&
-              e.getAttribute("aria-controls") &&
-              e.getAttribute("aria-haspopup")
-          );
-          id2 = rmi?.getAttribute("aria-controls");
-          return rmi ?? null;
-        },
-        cleanUpRadixDropDown = () => {
-          const rpdd = queryForRadixDropDown(),
-            rmi = queryForRadixMenuItem(rpdd);
-          if (!rmi && rpdd?.dataset.state === "open")
-            rpdd.dataset.state = "false";
-        },
-        setRadixAttrs = el => {
-          el.setAttribute("data-state", "open");
-          el.setAttribute("data-highlighted", "true");
-          if (el.getAttribute("data-radix-collection-item")) {
-            document
-              .querySelectorAll("[data-radix-collection]")
-              .forEach(erc => {
-                if (erc._radixCollectionState)
-                  erc._radixCollectionState.highlightedItem = el;
-              });
-          }
-          const iv = setInterval(() => {
-            const ctrld = el.getAttribute("aria-controls");
-            if (!ctrld) return;
-            const ctrlEl = document.getElementById(ctrld);
-            if (!ctrlEl && el.getAttribute("data-state") === "open") {
-              el.setAttribute("data-state", "closed");
-              el.setAttribute("data-highlighted", "false");
-            }
-          }, 100);
-          setTimeout(() => {
-            clearInterval(iv);
-            el.setAttribute("data-state", "closed");
-            el.setAttribute("data-highlighted", "false");
-            const idf1 = document.getElementById(id);
-            if (!idf1?.isConnected) id = "";
-            const idf2 = document.getElementById(id2);
-            if (!idf2?.isConnected) id2 = "";
-          }, 5000);
-        };
       let button = queryForButton();
       if (!button) return;
       if (button.dataset.state === "open" && !button.dataset.controls) {
@@ -163,9 +158,12 @@ function openGPTModelsRadixDropDown() {
         }
         const hvInterv = setInterval(() => {
             const hoverAttempt = () => {
+              if (!shouldTryHover) console.log("should not hover");
               if (!shouldTryHover) return;
               const rmi = queryForRadixMenuItem(),
                 rm = rmi?.closest('[role="menu"]');
+              if (!rmi || !rm?.getAttribute("data-state"))
+                console.log("could not get rmi");
               if (!rmi || !rm?.getAttribute("data-state")) return;
               const { width, height, left, top } = rmi.getBoundingClientRect();
               for (const el of [rm, ...rm.getElementsByTagName("div")]) {
@@ -238,19 +236,22 @@ function openGPTModelsRadixDropDown() {
             }, 25);
           }, 25),
           chkInterv = setInterval(() => {
-            const btn = queryForButton();
-            if (
-              !(btn instanceof HTMLElement) ||
-              (btn instanceof HTMLElement &&
-                !/radix/gi.test(button.getAttribute("aria-controls") || "")) ||
-              document.getElementById(id2)
-            )
-              shouldTryHover = false;
+            if (document.getElementById(id2)) shouldTryHover = false;
+            else shouldTryHover = true;
           }, 100);
         setTimeout(() => {
           clearInterval(hvInterv);
           clearInterval(chkInterv);
           cleanUpRadixDropDown();
+          shouldTryHover = true;
+          for (const v in [
+            "id",
+            "id2",
+            "shouldTryHover",
+            "limit",
+            "modelsLabelList",
+          ])
+            delete window[v];
         }, limit * 1.25);
       }, 250);
     },
@@ -322,11 +323,21 @@ function openGPTModelsRadixDropDown() {
           !target.dataset.highlighted
         )
           attempt();
-        setTimeout(() => {
-          id = "";
-          id2 = "";
-        }, 500);
       }, 100);
+      setTimeout(() => {
+        if (queryForSecondaryRadixMenu()) return;
+        cleanUpRadixDropDown();
+        const btn = queryForButton();
+        if (btn) {
+          btn.dataset.state = "closed";
+          btn.setAttribute("aria-expanded", "false");
+        }
+        shouldTryHover = true;
+        for (const v in ["id", "id2", "shouldTryHover"]) delete window[v];
+        if (id) id = "";
+        if (id2) id2 = "";
+        if (typeof shouldTryHover === "boolean") shouldTryHover = true;
+      }, 1000);
     };
   window.removeEventListener("keydown", openDDHandle);
   window.removeEventListener("keydown", choseModelHandle);
