@@ -7,10 +7,26 @@
 function openGPTModelsRadixDropDown() {
   let id = "",
     id2 = "",
-    shouldTryHover = true;
+    shouldTryHover = true,
+    pageCase = 1;
   const limit = 2000,
     modelsLabelList =
       /(model|modelo|modèle|modello|Modell|μοντέλο|モデル|모델|โมเดล|mô[\s-]?hình|модель|نموذج|מודל|मॉडल|মডেল|模型|模型)/gi,
+    endingCleanup = () => {
+      cleanUpRadixDropDown();
+      const btn = queryForButton();
+      if (btn) {
+        btn.dataset.state = "closed";
+        btn.setAttribute("aria-expanded", "false");
+      }
+      shouldTryHover = true;
+      for (const v in ["id", "id2", "shouldTryHover", "pageCase"])
+        delete window[v];
+      if (id) id = "";
+      if (id2) id2 = "";
+      if (typeof shouldTryHover === "boolean") shouldTryHover = true;
+      if (pageCase) pageCase = 1;
+    },
     queryForSecondaryRadixMenu = () => {
       return Array.from(
         document.querySelectorAll("[data-radix-popper-content-wrapper]")
@@ -23,13 +39,28 @@ function openGPTModelsRadixDropDown() {
         ?.querySelectorAll('[role="menuitem"]');
     },
     queryForButton = () => {
-      return [
+      let btn = [
         ...([...(document.querySelectorAll(".sticky") ?? [])]
           .find(e => e.querySelector("img") && e.querySelector("svg"))
           ?.querySelectorAll(".truncate") ?? []),
       ]
         .find(e => e.nextElementSibling instanceof SVGSVGElement)
         ?.closest("button");
+      if (!btn) {
+        pageCase = 2;
+        btn = [
+          ...document.querySelectorAll("button"),
+          ...document.querySelectorAll('[role="button"]'),
+        ].find(
+          b =>
+            b.id.startsWith(
+              "radix-" || ["model"].includes(b.getAttribute("aria-label"))
+            ) &&
+            b.classList.contains("group") &&
+            b.getBoundingClientRect().top
+        );
+      }
+      return btn;
     },
     queryForRadixDropDown = () => {
       const rps = Array.from(document.body.querySelectorAll("*")).filter(e =>
@@ -157,13 +188,11 @@ function openGPTModelsRadixDropDown() {
           attempt();
         }
         const hvInterv = setInterval(() => {
+            if (pageCase === 2) return;
             const hoverAttempt = () => {
-              if (!shouldTryHover) console.log("should not hover");
               if (!shouldTryHover) return;
               const rmi = queryForRadixMenuItem(),
                 rm = rmi?.closest('[role="menu"]');
-              if (!rmi || !rm?.getAttribute("data-state"))
-                console.log("could not get rmi");
               if (!rmi || !rm?.getAttribute("data-state")) return;
               const { width, height, left, top } = rmi.getBoundingClientRect();
               for (const el of [rm, ...rm.getElementsByTagName("div")]) {
@@ -242,16 +271,7 @@ function openGPTModelsRadixDropDown() {
         setTimeout(() => {
           clearInterval(hvInterv);
           clearInterval(chkInterv);
-          cleanUpRadixDropDown();
-          shouldTryHover = true;
-          for (const v in [
-            "id",
-            "id2",
-            "shouldTryHover",
-            "limit",
-            "modelsLabelList",
-          ])
-            delete window[v];
+          endingCleanup();
         }, limit * 1.25);
       }, 250);
     },
@@ -326,17 +346,7 @@ function openGPTModelsRadixDropDown() {
       }, 100);
       setTimeout(() => {
         if (queryForSecondaryRadixMenu()) return;
-        cleanUpRadixDropDown();
-        const btn = queryForButton();
-        if (btn) {
-          btn.dataset.state = "closed";
-          btn.setAttribute("aria-expanded", "false");
-        }
-        shouldTryHover = true;
-        for (const v in ["id", "id2", "shouldTryHover"]) delete window[v];
-        if (id) id = "";
-        if (id2) id2 = "";
-        if (typeof shouldTryHover === "boolean") shouldTryHover = true;
+        endingCleanup();
       }, 1000);
     };
   window.removeEventListener("keydown", openDDHandle);
