@@ -41,7 +41,9 @@ function openGPTModelsRadixDropDown() {
     queryForButton = () => {
       let btn = [
         ...([...(document.querySelectorAll(".sticky") ?? [])]
-          .find(e => e.querySelector("img") && e.querySelector("svg"))
+          .find(e => e.querySelector("img") && e.querySelector("svg") &&
+              !e.querySelector(".snorlax-heading") &&
+              !e.querySelector(".bg-token-sidebar-surface-primary"))
           ?.querySelectorAll(".truncate") ?? []),
       ]
         .find(e => e.nextElementSibling instanceof SVGSVGElement)
