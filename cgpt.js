@@ -41,9 +41,13 @@ function openGPTModelsRadixDropDown() {
     queryForButton = () => {
       let btn = [
         ...([...(document.querySelectorAll(".sticky") ?? [])]
-          .find(e => e.querySelector("img") && e.querySelector("svg") &&
+          .find(
+            e =>
+              e.querySelector("img") &&
+              e.querySelector("svg") &&
               !e.querySelector(".snorlax-heading") &&
-              !e.querySelector(".bg-token-sidebar-surface-primary"))
+              !e.querySelector(".bg-token-sidebar-surface-primary")
+          )
           ?.querySelectorAll(".truncate") ?? []),
       ]
         .find(e => e.nextElementSibling instanceof SVGSVGElement)
@@ -69,10 +73,11 @@ function openGPTModelsRadixDropDown() {
         e.hasAttribute("data-radix-popper-content-wrapper")
       );
       if (rps.length <= 1) return null;
+      queryForButton();
       return document.getElementById(id);
     },
-    queryForRadixMenuItem = rpdd => {
-      if (!rpdd?.isConnected) rpdd = queryForRadixDropDown();
+    queryForRadixMenuItem = () => {
+      const rpdd = queryForRadixDropDown();
       if (
         !rpdd ||
         (rpdd &&
@@ -85,7 +90,7 @@ function openGPTModelsRadixDropDown() {
         e =>
           modelsLabelList.test(e.innerText || "") &&
           e.getAttribute("aria-controls") &&
-          e.getAttribute("aria-haspopup")
+          !e.closest(".snorlax-heading")
       );
       id2 = rmi?.getAttribute("aria-controls");
       return rmi ?? null;
@@ -193,9 +198,10 @@ function openGPTModelsRadixDropDown() {
             if (pageCase === 2) return;
             const hoverAttempt = () => {
               if (!shouldTryHover) return;
-              const rmi = queryForRadixMenuItem(),
-                rm = rmi?.closest('[role="menu"]');
-              if (!rmi || !rm?.getAttribute("data-state")) return;
+              const rmi = queryForRadixMenuItem();
+              if (!rmi) return;
+              const rm = rmi?.closest('[role="menu"]');
+              if (!rm) return;
               const { width, height, left, top } = rmi.getBoundingClientRect();
               for (const el of [rm, ...rm.getElementsByTagName("div")]) {
                 if (!el?.isConnected) continue;
@@ -356,3 +362,4 @@ function openGPTModelsRadixDropDown() {
   window.addEventListener("keydown", openDDHandle);
   window.addEventListener("keydown", choseModelHandle);
 }
+
