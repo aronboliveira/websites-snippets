@@ -2,6 +2,12 @@
 
 Functions for quickly navigating or doing tasks in popular websites.
 
+# 🌐 Keybindings available for:
+
+1. 📞 [WhatsApp Web](https://web.whatsapp.com/)
+2. 🤖 [ChatGPT.com](https://chatgpt.com/)
+3. 😸 [GitHub](https://github.com/)
+
 Save the minified version as a bookmark for usage through clicking, or write them in the console!
 
 ⚠ IMPORTANT: These snippets **DO NOT PERSIST** through sessions. You have to click on them after every page load you wish to use them.
