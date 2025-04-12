@@ -1,6 +1,43 @@
 // ! THESE FUNCTIONS ARE STILL UNDER DEVELOPMENT, DO NOT USE THEM
 
 javascript: (() => {
+  const btns = Array.from(document.body.getElementsByTagName("button")),
+    sb =
+      document.getElementById("composer-submit-button") ||
+      btns.find(
+        e =>
+          e instanceof HTMLElement &&
+          e.dataset.testid?.toLowerCase() === "send-button"
+      );
+  if (!sb?.isConnected) return;
+  const aside = Array.from(
+      document.getElementsByClassName("bg-token-sidebar-surface-primary")
+    ).find(
+      e =>
+        e.nextElementSibling instanceof HTMLElement &&
+        (e.nextElementSibling.classList.contains("h-full") ||
+          (e.nextElementSibling.querySelector("main") &&
+            e.nextElementSibling.querySelector("textarea")))
+    ),
+    sbBtn =
+      btns.find(
+        e => e.dataset.testid?.toLowerCase() === "open-sidebar-button"
+      ) ||
+      Array.from(
+        document.getElementsByClassName("hover:text-token-text-primary")
+      ).filter(e => {
+        const pt = e.querySelector("path");
+        return (
+          pt?.getAttribute("d") ===
+          "M3 8C3 7.44772 3.44772 7 4 7H20C20.5523 7 21 7.44772 21 8C21 8.55228 20.5523 9 20 9H4C3.44772 9 3 8.55228 3 8ZM3 16C3 15.4477 3.44772 15 4 15H14C14.5523 15 15 15.4477 15 16C15 16.5523 14.5523 17 14 17H4C3.44772 17 3 16.5523 3 16Z"
+        );
+      });
+  // ! ASIDE IS UNRENDERED, NOT HIDDEN
+  return [sbBtn?.dataset.testid ?? "", aside?.dataset.testid ?? ""];
+})();
+
+
+javascript: (() => {
   let done = false;
   const tx = document.querySelectorAll("textarea[placeholder]")[0],
     dtx =
