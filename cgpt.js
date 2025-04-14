@@ -364,8 +364,9 @@ function openGPTModelsRadixDropDown() {
 }
 
 function addGPTAltEnter() {
-  const hd = ev => {
-    if (!(ev.key?.toLowerCase().trim() == "enter" || ev.keyCode === 13)) return;
+  const hd = kEv => {
+    if (!kEv.altKey) return;
+    if (!(kEv.key?.toLowerCase().trim() == "enter" || kEv.keyCode === 13)) return;
     const btns = Array.from(document.body.getElementsByTagName("button")),
       sb =
         document.getElementById("composer-submit-button") ||
