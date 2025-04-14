@@ -6,6 +6,7 @@ Functions for quickly navigating or doing tasks in popular websites.
 
 1. 📞 [WhatsApp Web](https://web.whatsapp.com/)
 2. 🤖 [ChatGPT.com](https://chatgpt.com/)
+3. 🐋 [DeepSeek](https://chat.deepseek.com/)
 3. 😸 [GitHub](https://github.com/)
 
 Save the minified version as a bookmark for usage through clicking, or write them in the console!
