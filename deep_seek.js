@@ -1,5 +1,5 @@
 /*
-* Use Alt + W for activating it; Alt + Q for deactivating 
+* Use Alt + Q for activating it; Alt + W for deactivating 
 * (it is recommended to use right before sending at the moment, since there is a watcher that deactivates it in the storage)
 * return {void}
 **/
