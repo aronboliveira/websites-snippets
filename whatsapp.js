@@ -568,7 +568,7 @@ function addWhatsAppKbShortcuts() {
       )?.click();
     },
     fvtCb = (e) => {
-      if (!((e.key?.toLowerCase() === "a" || e.keyCode === 65) && e.altKey))
+      if (!((e.key?.toLowerCase() === "s" || e.keyCode === 83) && e.altKey))
         return;
       (
         document.getElementById("favorites-filter") ??
@@ -600,7 +600,7 @@ function addWhatsAppKbShortcuts() {
       )?.click();
     },
     groupsCb = (e) => {
-      if (!((e.key?.toLowerCase() === "s" || e.keyCode === 83) && e.altKey))
+      if (!((e.key?.toLowerCase() === "x" || e.keyCode === 88) && e.altKey))
         return;
       (
         document.getElementById("group-filter") ??
@@ -1153,7 +1153,7 @@ function addWhatsAppKbShortcuts__TabBtnsOnly() {
       )?.click();
     },
     fvtCb = (e) => {
-      if (!((e.key.toLowerCase() === "a" || e.keyCode === 65) && e.altKey))
+      if (!((e.key.toLowerCase() === "s" || e.keyCode === 83) && e.altKey))
         return;
       (
         document.getElementById("favorites-filter") ??
@@ -1185,7 +1185,7 @@ function addWhatsAppKbShortcuts__TabBtnsOnly() {
       )?.click();
     },
     groupsCb = (e) => {
-      if (!((e.key.toLowerCase() === "s" || e.keyCode === 83) && e.altKey))
+      if (!((e.key.toLowerCase() === "x" || e.keyCode === 88) && e.altKey))
         return;
       (
         document.getElementById("group-filter") ??
