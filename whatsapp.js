@@ -1524,6 +1524,118 @@ function addWhatsAppKbShortcuts__ArchiveOnly() {
       }
     }
   }, 500);
+    const queryAttachDropdown = Array.from(document.getElementsByTagName("ul"))
+      .find(
+        l =>
+          l.querySelector("[data-animate-dropdown-item]") &&
+          l.closest('[role="application"]')
+      )
+      ?.querySelectorAll("li"),
+    queryForDataIcon = icon => {
+      if (typeof icon !== "string") return;
+      return queryAttachDropdown()
+        ?.querySelector(`[data-icon^="${icon}-"]`)
+        ?.closest("li")?.parentElement;
+    },
+    fireDataIconEvent = async ic => {
+      const { width, height, bottom, right } = ic.getBoundingClientRect(),
+        cx = bottom - width * 0.5,
+        cy = right - height * 0.5,
+        els = ic.querySelectorAll("*");
+      for (const el of els) {
+        await new Promise(resolve => setTimeout(resolve, 10));
+        for (const ev of [
+          "pointerdown",
+          "mousedown",
+          "pointerup",
+          "mouseup",
+          "click",
+        ]) {
+          await new Promise(resolve => setTimeout(resolve, 10));
+          ic.focus();
+          ev.dispatchEvent(
+            new MouseEvent({
+              bubbles: true,
+              cancelable: true,
+              view: window,
+              clientX: cx,
+              clientY: cy,
+              target: el,
+              currentTarget: el,
+              isTrusted: true,
+              screenX: window.screenX + cx,
+              screenY: window.screenY + cy,
+              ...(ev.startsWith("pointer") && {
+                pointerId: 1,
+                pointerType: "mouse",
+                isPrimary: true,
+              }),
+            })
+          );
+        }
+      }
+    },
+    clickDoc = async ev => {
+      if (!(ev.altKey && (ev.key?.toLowerCase() === "t" || ev.keyCode === 84)))
+        return;
+      const ic = queryForDataIcon("document");
+      if (!ic) return;
+      fireDataIconEvent(ic);
+    },
+    clickImg = async ev => {
+      if (!(ev.altKey && (ev.key?.toLowerCase() === "y" || ev.keyCode === 89)))
+        return;
+      const ic = queryForDataIcon("media");
+      if (!ic) return;
+      fireDataIconEvent(ic);
+    },
+    clickCamera = async ev => {
+      if (!(ev.altKey && (ev.key?.toLowerCase() === "u" || ev.keyCode === 85)))
+        return;
+      const ic = queryForDataIcon("media");
+      if (!ic) return;
+      fireDataIconEvent(ic);
+    },
+    clickContact = async ev => {
+      if (!(ev.altKey && (ev.key?.toLowerCase() === "f" || ev.keyCode === 70)))
+        return;
+      const ic = queryForDataIcon("person");
+      if (!ic) return;
+      fireDataIconEvent(ic);
+    },
+    clickPoll = async ev => {
+      if (!(ev.altKey && (ev.key?.toLowerCase() === "g" || ev.keyCode === 71)))
+        return;
+      const ic = queryForDataIcon("poll");
+      if (!ic) return;
+      fireDataIconEvent(ic);
+    },
+    clickNewEvent = async ev => {
+      if (!(ev.altKey && (ev.key?.toLowerCase() === "h" || ev.keyCode === 72)))
+        return;
+      const ic = queryForDataIcon("calendar");
+      if (!ic) return;
+      fireDataIconEvent(ic);
+    },
+    clickNewSticker = async ev => {
+      if (!(ev.altKey && (ev.key?.toLowerCase() === "c" || ev.keyCode === 67)))
+        return;
+      const ic = queryForDataIcon("sticker");
+      if (!ic) return;
+      fireDataIconEvent(ic);
+    };
+  for (const cb of [
+    clickDoc,
+    clickImg,
+    clickCamera,
+    clickContact,
+    clickPoll,
+    clickNewEvent,
+    clickNewSticker,
+  ]) {
+    window.removeEventListener("keypress", cb);
+    window.addEventListener("keypress", cb);
+  }
 }
 
 // Version only for searching
