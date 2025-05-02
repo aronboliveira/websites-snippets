@@ -391,7 +391,7 @@ function addWhatsAppKbShortcuts() {
       if (
         !(
           (e.key === "ArrowRight" || e.key === "Right" || e.keyCode === 39) &&
-          e.ctrlKey
+          e.ctrlKey && e.altKey
         )
       )
         return;
@@ -478,7 +478,7 @@ function addWhatsAppKbShortcuts() {
       if (
         !(
           (e.key === "ArrowLeft" || e.key === "Left" || e.keyCode === 37) &&
-          e.ctrlKey
+          e.ctrlKey && e.altKey
         )
       )
         return;
