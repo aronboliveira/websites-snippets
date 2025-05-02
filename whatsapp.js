@@ -968,17 +968,20 @@ function addWhatsAppKbShortcuts() {
       }
     }
   }, 500);
-  const queryAttachDropdown = Array.from(document.getElementsByTagName("ul"))
-      .find(
-        l =>
-          l.querySelector("[data-animate-dropdown-item]") &&
-          l.closest('[role="application"]')
-      )
-      ?.querySelectorAll("li"),
+    const queryAttachDropdown = () =>
+      Array.from(
+        Array.from(document.getElementsByTagName("ul"))
+          .find(
+            l =>
+              l.querySelector("[data-animate-dropdown-item]") &&
+              l.closest('[role="application"]')
+          )
+          ?.querySelectorAll("li")
+      ),
     queryForDataIcon = icon => {
       if (typeof icon !== "string") return;
       return queryAttachDropdown()
-        ?.querySelector(`[data-icon^="${icon}-"]`)
+        .find(l => l?.querySelector(`[data-icon^="${icon}-"]`))
         ?.closest("li")?.parentElement;
     },
     fireDataIconEvent = async ic => {
@@ -986,8 +989,7 @@ function addWhatsAppKbShortcuts() {
         cx = bottom - width * 0.5,
         cy = right - height * 0.5,
         els = ic.querySelectorAll("*");
-      for (const el of els) {
-        await new Promise(resolve => setTimeout(resolve, 10));
+      for (const el of els)
         for (const ev of [
           "pointerdown",
           "mousedown",
@@ -995,74 +997,77 @@ function addWhatsAppKbShortcuts() {
           "mouseup",
           "click",
         ]) {
-          await new Promise(resolve => setTimeout(resolve, 10));
-          ic.focus();
-          ev.dispatchEvent(
-            new MouseEvent({
-              bubbles: true,
-              cancelable: true,
-              view: window,
-              clientX: cx,
-              clientY: cy,
-              target: el,
-              currentTarget: el,
-              isTrusted: true,
-              screenX: window.screenX + cx,
-              screenY: window.screenY + cy,
-              ...(ev.startsWith("pointer") && {
-                pointerId: 1,
-                pointerType: "mouse",
-                isPrimary: true,
-              }),
-            })
-          );
+          for (const t of [ic, ic.firstElementChild]) {
+            if (!t?.isConnected) return;
+            t.focus();
+            el.dispatchEvent(
+              new MouseEvent({
+                ev,
+                bubbles: true,
+                cancelable: true,
+                view: window,
+                clientX: cx,
+                clientY: cy,
+                target: t,
+                currentTarget: t,
+                isTrusted: true,
+                screenX: window.screenX + cx,
+                screenY: window.screenY + cy,
+                ...(ev.startsWith("pointer") && {
+                  pointerId: 1,
+                  pointerType: "mouse",
+                  isPrimary: true,
+                }),
+              })
+            );
+            el.click();
+          }
         }
-      }
     },
-    clickDoc = async ev => {
+    clickDoc = ev => {
       if (!(ev.altKey && (ev.key?.toLowerCase() === "t" || ev.keyCode === 84)))
         return;
       const ic = queryForDataIcon("document");
       if (!ic) return;
       fireDataIconEvent(ic);
     },
-    clickImg = async ev => {
+    clickImg = ev => {
       if (!(ev.altKey && (ev.key?.toLowerCase() === "y" || ev.keyCode === 89)))
         return;
       const ic = queryForDataIcon("media");
       if (!ic) return;
       fireDataIconEvent(ic);
     },
-    clickCamera = async ev => {
+    clickCamera = ev => {
       if (!(ev.altKey && (ev.key?.toLowerCase() === "u" || ev.keyCode === 85)))
         return;
-      const ic = queryForDataIcon("media");
+      const ic = queryForDataIcon("camera");
       if (!ic) return;
       fireDataIconEvent(ic);
     },
-    clickContact = async ev => {
-      if (!(ev.altKey && (ev.key?.toLowerCase() === "f" || ev.keyCode === 70)))
+    clickContact = ev => {
+      if (!(ev.altKey && (ev.key?.toLowerCase() === "g" || ev.keyCode === 71)))
         return;
       const ic = queryForDataIcon("person");
       if (!ic) return;
       fireDataIconEvent(ic);
     },
-    clickPoll = async ev => {
-      if (!(ev.altKey && (ev.key?.toLowerCase() === "g" || ev.keyCode === 71)))
+    clickPoll = ev => {
+      if (!(ev.altKey && (ev.key?.toLowerCase() === "j" || ev.keyCode === 74)))
         return;
       const ic = queryForDataIcon("poll");
       if (!ic) return;
       fireDataIconEvent(ic);
     },
-    clickNewEvent = async ev => {
-      if (!(ev.altKey && (ev.key?.toLowerCase() === "h" || ev.keyCode === 72)))
+    clickNewEvent = ev => {
+      if (!(ev.altKey && (ev.key?.toLowerCase() === "c" || ev.keyCode === 67)))
         return;
       const ic = queryForDataIcon("calendar");
       if (!ic) return;
       fireDataIconEvent(ic);
     },
-    clickNewSticker = async ev => {
-      if (!(ev.altKey && (ev.key?.toLowerCase() === "c" || ev.keyCode === 67)))
+    clickNewSticker = ev => {
+      if (!(ev.altKey && (ev.key?.toLowerCase() === "v" || ev.keyCode === 86)))
         return;
       const ic = queryForDataIcon("sticker");
       if (!ic) return;
@@ -1077,8 +1082,8 @@ function addWhatsAppKbShortcuts() {
     clickNewEvent,
     clickNewSticker,
   ]) {
-    window.removeEventListener("keypress", cb);
-    window.addEventListener("keypress", cb);
+    window.removeEventListener("keydown", cb);
+    window.addEventListener("keydown", cb, { passive: true });
   }
 }
 
