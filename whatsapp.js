@@ -1,7 +1,7 @@
 function addWhatsAppKbShortcuts() {
   const queryAllElements = () => {
       const archive = [...(document.body?.getElementsByTagName("button") || [])]
-          .filter((b) => {
+          .filter(b => {
             const al = b.getAttribute("aria-label"),
               t = b.innerText;
             return [
@@ -69,9 +69,9 @@ function addWhatsAppKbShortcuts() {
               "arc.",
               "archd",
               "archv",
-            ].some((l) =>
+            ].some(l =>
               [al, t].some(
-                (t) =>
+                t =>
                   t?.toString().trim().toLowerCase() === l.trim().toLowerCase()
               )
             );
@@ -79,17 +79,17 @@ function addWhatsAppKbShortcuts() {
           .at(0),
         back = [...document.getElementsByTagName("header")]
           .filter(
-            (h) =>
+            h =>
               h.getElementsByTagName("button") ||
               h.querySelector('[role="button"]')
           )
-          .flatMap((h) => [
+          .flatMap(h => [
             ...h.getElementsByTagName("button"),
             ...h.querySelectorAll('[role="button"]'),
           ])
-          .filter((b) =>
+          .filter(b =>
             [b.getAttribute("aria-label"), b.getAttribute("data-icon")].some(
-              (l) =>
+              l =>
                 l?.toLowerCase().trim() === "back" ||
                 l?.toLowerCase().trim().startsWith("back-")
             )
@@ -98,7 +98,7 @@ function addWhatsAppKbShortcuts() {
         tabBtns = [...document.body.querySelectorAll('button[role="tab"]')],
         all =
           document.getElementById("all-filter") ??
-          tabBtns.find((b) => {
+          tabBtns.find(b => {
             const t = b.innerText?.trim().toLowerCase();
             return [
               "all",
@@ -124,7 +124,7 @@ function addWhatsAppKbShortcuts() {
           }),
         unread =
           document.getElementById("unread-filter") ??
-          tabBtns.find((b) => {
+          tabBtns.find(b => {
             const t = b.innerText?.trim().toLowerCase();
             return [
               "unread",
@@ -151,7 +151,7 @@ function addWhatsAppKbShortcuts() {
           }),
         favourites =
           document.getElementById("favorites-filter") ??
-          tabBtns.find((b) => {
+          tabBtns.find(b => {
             const t = b.innerText?.trim().toLowerCase();
             return [
               "favourites",
@@ -178,7 +178,7 @@ function addWhatsAppKbShortcuts() {
           }),
         groups =
           document.getElementById("group-filter") ??
-          tabBtns.find((b) => {
+          tabBtns.find(b => {
             const t = b.innerText?.trim().toLowerCase();
             return [
               "groups",
@@ -204,7 +204,7 @@ function addWhatsAppKbShortcuts() {
           }),
         more = [...document.getElementsByTagName("button")]
           .filter(
-            (b) =>
+            b =>
               b.title?.trim().toLowerCase() === "menu" &&
               (b.firstElementChild
                 ?.getAttribute("data-icon")
@@ -218,11 +218,11 @@ function addWhatsAppKbShortcuts() {
           )
           .at(0),
         ngrp = [...document.getElementsByTagName("li")]
-          .flatMap((e) => [
+          .flatMap(e => [
             ...e.querySelectorAll("span"),
             ...e.querySelectorAll("div"),
           ])
-          .find((el) => {
+          .find(el => {
             const txt = el.innerText?.trim().toLowerCase();
             return [
               "new group",
@@ -248,7 +248,7 @@ function addWhatsAppKbShortcuts() {
             ].includes(txt);
           }),
         close = [...document.querySelectorAll('div[role="button"]')].find(
-          (b) =>
+          b =>
             [
               "close",
               "cerrar",
@@ -283,7 +283,7 @@ function addWhatsAppKbShortcuts() {
               "sulge",
               "ປິດ",
             ].includes(b.getAttribute("aria-label")?.trim().toLowerCase()) ||
-            [...b.getElementsByTagName("span")].some((c) =>
+            [...b.getElementsByTagName("span")].some(c =>
               [
                 "close-",
                 "cerrar-",
@@ -322,7 +322,7 @@ function addWhatsAppKbShortcuts() {
         ),
         search = [
           ...document.querySelectorAll("p.selectable-text.copyable-text"),
-        ].find((p) =>
+        ].find(p =>
           [
             "pesquisar",
             "busca",
@@ -387,7 +387,7 @@ function addWhatsAppKbShortcuts() {
         search,
       };
     },
-    archiveCb = (e) => {
+    archiveCb = e => {
       if (
         !(
           (e.key === "ArrowRight" || e.key === "Right" || e.keyCode === 39) &&
@@ -397,7 +397,7 @@ function addWhatsAppKbShortcuts() {
         return;
       e.preventDefault();
       [...(document.body?.getElementsByTagName("button") || [])]
-        .filter((b) => {
+        .filter(b => {
           const al = b.getAttribute("aria-label"),
             t = b.innerText;
           return [
@@ -465,17 +465,16 @@ function addWhatsAppKbShortcuts() {
             "arc.",
             "archd",
             "archv",
-          ].some((l) =>
+          ].some(l =>
             [al, t].some(
-              (t) =>
-                t?.toString().trim().toLowerCase() === l.trim().toLowerCase()
+              t => t?.toString().trim().toLowerCase() === l.trim().toLowerCase()
             )
           );
         })
         .at(0)
         ?.click();
     },
-    backCb = (e) => {
+    backCb = e => {
       if (
         !(
           (e.key === "ArrowLeft" || e.key === "Left" || e.keyCode === 37) &&
@@ -486,17 +485,17 @@ function addWhatsAppKbShortcuts() {
       e.preventDefault();
       [...document.getElementsByTagName("header")]
         .filter(
-          (h) =>
+          h =>
             h.getElementsByTagName("button") ||
             h.querySelector('[role="button"]')
         )
-        .flatMap((h) => [
+        .flatMap(h => [
           ...h.getElementsByTagName("button"),
           ...h.querySelectorAll('[role="button"]'),
         ])
-        .filter((b) =>
+        .filter(b =>
           [b.getAttribute("aria-label"), b.getAttribute("data-icon")].some(
-            (l) =>
+            l =>
               l?.toLowerCase().trim() === "back" ||
               l?.toLowerCase().trim().startsWith("back-")
           )
@@ -504,12 +503,12 @@ function addWhatsAppKbShortcuts() {
         .at(0)
         ?.click();
     },
-    allCb = (e) => {
+    allCb = e => {
       if (!((e.key?.toLowerCase() === "q" || e.keyCode === 81) && e.altKey))
         return;
       (
         document.getElementById("all-filter") ??
-        tabBtns.find((b) => {
+        tabBtns.find(b => {
           const t = b.innerText?.trim().toLowerCase();
           return [
             "all",
@@ -535,12 +534,12 @@ function addWhatsAppKbShortcuts() {
         })
       )?.click();
     },
-    unreadCb = (e) => {
+    unreadCb = e => {
       if (!((e.key?.toLowerCase() === "w" || e.keyCode === 87) && e.altKey))
         return;
       (
         document.getElementById("unread-filter") ??
-        tabBtns.find((b) => {
+        tabBtns.find(b => {
           const t = b.innerText?.trim().toLowerCase();
           return [
             "unread",
@@ -567,12 +566,12 @@ function addWhatsAppKbShortcuts() {
         })
       )?.click();
     },
-    fvtCb = (e) => {
+    fvtCb = e => {
       if (!((e.key?.toLowerCase() === "s" || e.keyCode === 83) && e.altKey))
         return;
       (
         document.getElementById("favorites-filter") ??
-        tabBtns.find((b) => {
+        tabBtns.find(b => {
           const t = b.innerText?.trim().toLowerCase();
           return [
             "favourites",
@@ -599,12 +598,12 @@ function addWhatsAppKbShortcuts() {
         })
       )?.click();
     },
-    groupsCb = (e) => {
+    groupsCb = e => {
       if (!((e.key?.toLowerCase() === "x" || e.keyCode === 88) && e.altKey))
         return;
       (
         document.getElementById("group-filter") ??
-        tabBtns.find((b) => {
+        tabBtns.find(b => {
           const t = b.innerText?.trim().toLowerCase();
           return [
             "groups",
@@ -630,12 +629,12 @@ function addWhatsAppKbShortcuts() {
         })
       )?.click();
     },
-    moreCb = (e) => {
+    moreCb = e => {
       if (!((e.key?.toLowerCase() === "m" || e.keyCode === 77) && e.altKey))
         return;
       [...document.getElementsByTagName("button")]
         .filter(
-          (b) =>
+          b =>
             b.title?.trim().toLowerCase() === "menu" &&
             (b.firstElementChild
               ?.getAttribute("data-icon")
@@ -650,15 +649,15 @@ function addWhatsAppKbShortcuts() {
         .at(0)
         ?.click();
     },
-    ngrpCb = (e) => {
+    ngrpCb = e => {
       if (!((e.key?.toLowerCase() === "n" || e.keyCode === 78) && e.altKey))
         return;
       [...document.getElementsByTagName("li")]
-        .flatMap((e) => [
+        .flatMap(e => [
           ...e.querySelectorAll("span"),
           ...e.querySelectorAll("div"),
         ])
-        .find((el) => {
+        .find(el => {
           const txt = el.innerText?.trim().toLowerCase();
           return [
             "new group",
@@ -685,12 +684,12 @@ function addWhatsAppKbShortcuts() {
         })
         ?.click();
     },
-    closeCb = (e) => {
+    closeCb = e => {
       if (!((e.key?.toLowerCase() === "b" || e.keyCode === 66) && e.altKey))
         return;
       [...document.querySelectorAll('div[role="button"]')]
         .find(
-          (b) =>
+          b =>
             [
               "close",
               "cerrar",
@@ -725,7 +724,7 @@ function addWhatsAppKbShortcuts() {
               "sulge",
               "ປິດ",
             ].includes(b.getAttribute("aria-label")?.trim().toLowerCase()) ||
-            [...b.getElementsByTagName("span")].some((c) =>
+            [...b.getElementsByTagName("span")].some(c =>
               [
                 "close-",
                 "cerrar-",
@@ -764,12 +763,12 @@ function addWhatsAppKbShortcuts() {
         )
         ?.click();
     },
-    searchCb = (e) => {
+    searchCb = e => {
       if (!((e.key?.toLowerCase() === "l" || e.keyCode === 76) && e.altKey))
         return;
       const p = [
           ...document.querySelectorAll("p.selectable-text.copyable-text"),
-        ].find((p) =>
+        ].find(p =>
           [
             "pesquisar",
             "busca",
@@ -830,7 +829,7 @@ function addWhatsAppKbShortcuts() {
         if (acc >= 10 || currEl === document.body) break;
         acc += 1;
       }
-      const editable = parents.filter(Boolean).find((p) => p.contentEditable);
+      const editable = parents.filter(Boolean).find(p => p.contentEditable);
       editable?.focus();
       setTimeout(() => {
         if (!editable?.isConnected) return;
@@ -969,7 +968,120 @@ function addWhatsAppKbShortcuts() {
       }
     }
   }, 500);
+  const queryAttachDropdown = Array.from(document.getElementsByTagName("ul"))
+      .find(
+        l =>
+          l.querySelector("[data-animate-dropdown-item]") &&
+          l.closest('[role="application"]')
+      )
+      ?.querySelectorAll("li"),
+    queryForDataIcon = icon => {
+      if (typeof icon !== "string") return;
+      return queryAttachDropdown()
+        ?.querySelector(`[data-icon^="${icon}-"]`)
+        ?.closest("li")?.parentElement;
+    },
+    fireDataIconEvent = async ic => {
+      const { width, height, bottom, right } = ic.getBoundingClientRect(),
+        cx = bottom - width * 0.5,
+        cy = right - height * 0.5,
+        els = ic.querySelectorAll("*");
+      for (const el of els) {
+        await new Promise(resolve => setTimeout(resolve, 10));
+        for (const ev of [
+          "pointerdown",
+          "mousedown",
+          "pointerup",
+          "mouseup",
+          "click",
+        ]) {
+          await new Promise(resolve => setTimeout(resolve, 10));
+          ic.focus();
+          ev.dispatchEvent(
+            new MouseEvent({
+              bubbles: true,
+              cancelable: true,
+              view: window,
+              clientX: cx,
+              clientY: cy,
+              target: el,
+              currentTarget: el,
+              isTrusted: true,
+              screenX: window.screenX + cx,
+              screenY: window.screenY + cy,
+              ...(ev.startsWith("pointer") && {
+                pointerId: 1,
+                pointerType: "mouse",
+                isPrimary: true,
+              }),
+            })
+          );
+        }
+      }
+    },
+    clickDoc = async ev => {
+      if (!(ev.altKey && (ev.key?.toLowerCase() === "t" || ev.keyCode === 84)))
+        return;
+      const ic = queryForDataIcon("document");
+      if (!ic) return;
+      fireDataIconEvent(ic);
+    },
+    clickImg = async ev => {
+      if (!(ev.altKey && (ev.key?.toLowerCase() === "y" || ev.keyCode === 89)))
+        return;
+      const ic = queryForDataIcon("media");
+      if (!ic) return;
+      fireDataIconEvent(ic);
+    },
+    clickCamera = async ev => {
+      if (!(ev.altKey && (ev.key?.toLowerCase() === "u" || ev.keyCode === 85)))
+        return;
+      const ic = queryForDataIcon("media");
+      if (!ic) return;
+      fireDataIconEvent(ic);
+    },
+    clickContact = async ev => {
+      if (!(ev.altKey && (ev.key?.toLowerCase() === "f" || ev.keyCode === 70)))
+        return;
+      const ic = queryForDataIcon("person");
+      if (!ic) return;
+      fireDataIconEvent(ic);
+    },
+    clickPoll = async ev => {
+      if (!(ev.altKey && (ev.key?.toLowerCase() === "g" || ev.keyCode === 71)))
+        return;
+      const ic = queryForDataIcon("poll");
+      if (!ic) return;
+      fireDataIconEvent(ic);
+    },
+    clickNewEvent = async ev => {
+      if (!(ev.altKey && (ev.key?.toLowerCase() === "h" || ev.keyCode === 72)))
+        return;
+      const ic = queryForDataIcon("calendar");
+      if (!ic) return;
+      fireDataIconEvent(ic);
+    },
+    clickNewSticker = async ev => {
+      if (!(ev.altKey && (ev.key?.toLowerCase() === "c" || ev.keyCode === 67)))
+        return;
+      const ic = queryForDataIcon("sticker");
+      if (!ic) return;
+      fireDataIconEvent(ic);
+    };
+  for (const cb of [
+    clickDoc,
+    clickImg,
+    clickCamera,
+    clickContact,
+    clickPoll,
+    clickNewEvent,
+    clickNewSticker,
+  ]) {
+    window.removeEventListener("keypress", cb);
+    window.addEventListener("keypress", cb);
+  }
 }
+
 /**
 * Version with shortcuts only for tab buttons for types of messages
 **/
@@ -1524,118 +1636,6 @@ function addWhatsAppKbShortcuts__ArchiveOnly() {
       }
     }
   }, 500);
-    const queryAttachDropdown = Array.from(document.getElementsByTagName("ul"))
-      .find(
-        l =>
-          l.querySelector("[data-animate-dropdown-item]") &&
-          l.closest('[role="application"]')
-      )
-      ?.querySelectorAll("li"),
-    queryForDataIcon = icon => {
-      if (typeof icon !== "string") return;
-      return queryAttachDropdown()
-        ?.querySelector(`[data-icon^="${icon}-"]`)
-        ?.closest("li")?.parentElement;
-    },
-    fireDataIconEvent = async ic => {
-      const { width, height, bottom, right } = ic.getBoundingClientRect(),
-        cx = bottom - width * 0.5,
-        cy = right - height * 0.5,
-        els = ic.querySelectorAll("*");
-      for (const el of els) {
-        await new Promise(resolve => setTimeout(resolve, 10));
-        for (const ev of [
-          "pointerdown",
-          "mousedown",
-          "pointerup",
-          "mouseup",
-          "click",
-        ]) {
-          await new Promise(resolve => setTimeout(resolve, 10));
-          ic.focus();
-          ev.dispatchEvent(
-            new MouseEvent({
-              bubbles: true,
-              cancelable: true,
-              view: window,
-              clientX: cx,
-              clientY: cy,
-              target: el,
-              currentTarget: el,
-              isTrusted: true,
-              screenX: window.screenX + cx,
-              screenY: window.screenY + cy,
-              ...(ev.startsWith("pointer") && {
-                pointerId: 1,
-                pointerType: "mouse",
-                isPrimary: true,
-              }),
-            })
-          );
-        }
-      }
-    },
-    clickDoc = async ev => {
-      if (!(ev.altKey && (ev.key?.toLowerCase() === "t" || ev.keyCode === 84)))
-        return;
-      const ic = queryForDataIcon("document");
-      if (!ic) return;
-      fireDataIconEvent(ic);
-    },
-    clickImg = async ev => {
-      if (!(ev.altKey && (ev.key?.toLowerCase() === "y" || ev.keyCode === 89)))
-        return;
-      const ic = queryForDataIcon("media");
-      if (!ic) return;
-      fireDataIconEvent(ic);
-    },
-    clickCamera = async ev => {
-      if (!(ev.altKey && (ev.key?.toLowerCase() === "u" || ev.keyCode === 85)))
-        return;
-      const ic = queryForDataIcon("media");
-      if (!ic) return;
-      fireDataIconEvent(ic);
-    },
-    clickContact = async ev => {
-      if (!(ev.altKey && (ev.key?.toLowerCase() === "f" || ev.keyCode === 70)))
-        return;
-      const ic = queryForDataIcon("person");
-      if (!ic) return;
-      fireDataIconEvent(ic);
-    },
-    clickPoll = async ev => {
-      if (!(ev.altKey && (ev.key?.toLowerCase() === "g" || ev.keyCode === 71)))
-        return;
-      const ic = queryForDataIcon("poll");
-      if (!ic) return;
-      fireDataIconEvent(ic);
-    },
-    clickNewEvent = async ev => {
-      if (!(ev.altKey && (ev.key?.toLowerCase() === "h" || ev.keyCode === 72)))
-        return;
-      const ic = queryForDataIcon("calendar");
-      if (!ic) return;
-      fireDataIconEvent(ic);
-    },
-    clickNewSticker = async ev => {
-      if (!(ev.altKey && (ev.key?.toLowerCase() === "c" || ev.keyCode === 67)))
-        return;
-      const ic = queryForDataIcon("sticker");
-      if (!ic) return;
-      fireDataIconEvent(ic);
-    };
-  for (const cb of [
-    clickDoc,
-    clickImg,
-    clickCamera,
-    clickContact,
-    clickPoll,
-    clickNewEvent,
-    clickNewSticker,
-  ]) {
-    window.removeEventListener("keypress", cb);
-    window.addEventListener("keypress", cb);
-  }
 }
 
 // Version only for searching
