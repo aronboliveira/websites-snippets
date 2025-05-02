@@ -11,6 +11,13 @@
   9. Alt + b => Close new group drawer
   10. Alt + l => Focus in search bar (for typing)
   11. Alt + [Number] => Move between chats using keyboard numbers (Alt + 1, Alt + 2, etc...)
+  12. Alt + a then Alt + t => Open file attachment
+  13. Alt + a then Alt + y => Open media attachment
+  14. Alt + a then Alt + u => Open camera
+  15. Alt + a then Alt + g => Open contacts attachment
+  16. Alt + a then Alt + j => Open new poll modal
+  17. Alt + a then Alt + c => Open new event modal
+  18. Alt + a then Alt + v => Open new sticker modal
   NOTE: !! THIS NEEDS TO BE REACTIVATED EVERY TIME YOU LOAD THE WEBPAGE !!
   -> Pick the version of your preference and copy ONLY one line starting with javascript
 **/
