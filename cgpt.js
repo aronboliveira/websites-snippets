@@ -453,7 +453,7 @@ function addGPTAltEnter() {
 
 function addProseFocusKb() {
   const handleProse = async kEv => {
-    if (!(kEv?.altKey && (kEv.key === "1" || kEv.key === 49))) return;
+    if (!(kEv?.altKey && (kEv.key.toLowerCase() === "w" || kEv.key === 87))) return;
     const prose = Array.from(document.querySelectorAll(".ProseMirror")).find(
       e => e.contentEditable === "true"
     );
@@ -919,7 +919,7 @@ function addAllGptKbs() {
       }
     },
     handleProse = async kEv => {
-      if (!(kEv?.altKey && (kEv.key === "1" || kEv.key === 49))) return;
+      if (!(kEv?.altKey && (kEv.key.toLowerCase() === "w" || kEv.key === 87))) return;
       const prose = Array.from(document.querySelectorAll(".ProseMirror")).find(
         e => e.contentEditable === "true"
       );
