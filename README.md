@@ -9,9 +9,15 @@ Functions for quickly navigating or doing tasks in popular websites.
 3. 🐋 [DeepSeek](https://chat.deepseek.com/)
 3. 😸 [GitHub](https://github.com/)
 
+# 🧩 Extension usage (working on it...)
+
+Download the .zip file and load it with Load Unpacked in Extensions > Manage Extensions 
+
+# ⭐ Bookmark usage (available for all)
+
 Save the minified version as a bookmark for usage through clicking, or write them in the console!
 
-⚠ IMPORTANT: These snippets **DO NOT PERSIST** through sessions. You have to click on them after every page load you wish to use them.
+⚠ IMPORTANT: These snippets **DO NOT PERSIST** through sessions if you opt for using the bookmark version. You have to click on them after every page load you wish to use them.
 
 🕷 Please submit any **Bugs** to the [Developer e-mail](mailto:aron.programador@gmail.com)
 
