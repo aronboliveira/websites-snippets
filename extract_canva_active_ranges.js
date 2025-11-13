@@ -1,5 +1,5 @@
 /*
-Simple snippet to extract and save the menus on screen from a Canva editor panel.
+Simple snippet to extract and save the range values on screen from a Canva editor panel.
 Save it as a bookmark and click on it to trigger.
 */
 javascript: (() => {
