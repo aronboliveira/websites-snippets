@@ -1,7 +1,3 @@
-/*
-Simple snippet to extract and save the range values on screen from a Canva editor panel.
-Save it as a bookmark and click on it to trigger.
-*/
 javascript: (() => {
   const anchor = document.createElement("a");
   anchor.href = URL.createObjectURL(
@@ -25,4 +21,8 @@ javascript: (() => {
   anchor.click();
   document.body.removeChild(anchor);
   URL.revokeObjectURL(anchor.href);
+/*
+Simple snippet to extract and save the range values on screen from a Canva editor panel.
+Save it as a bookmark and click on it to trigger.
+*/
 })();
